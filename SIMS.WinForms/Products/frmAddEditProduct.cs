@@ -48,7 +48,7 @@ namespace SIMS.WinForms.Products
                 "إضافة منتج جديد" :
                 "تعديل منتج";
 
-            cbCategory.DataSource = clsCategory.GetCategoryList();
+            cbCategory.DataSource = clsCategoryService.GetActiveCategoriesList();
             cbCategory.ValueMember = "CategoryID";
             cbCategory.DisplayMember = "CategoryName";
             cbCategory.SelectedValue = -1;

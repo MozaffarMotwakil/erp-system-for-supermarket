@@ -1,41 +1,93 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
-using BusinessLogic.Utilities;
-using DataAccess.Products;
-using DataAccess.Warehouses;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Users;
+using BusinessLogic.Validation;
 using DTOs.Products;
 
 namespace BusinessLogic.Products
 {
-    public class clsCategory
+    public class clsCategory : IEntityActivity
     {
-        public int CategoryID { get; }
-        public string CategoryName { get; }
+        public int? CategoryID { get; private set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public clsUser CreatedByUserInfo { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public clsUser UpdatedByUserInfo { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public enMode Mode { get; internal set; }
 
-        private clsCategory(clsCategoryDTO categoryDTO)
+        public clsCategory(string categoryName, string description)
+        {
+            CategoryName = categoryName;
+            Description = description;
+            IsActive = true;
+            Mode = enMode.Add;
+        }
+
+        internal clsCategory(clsCategoryDTO categoryDTO)
         {
             CategoryID = categoryDTO.CategoryID;
             CategoryName = categoryDTO.CategoryName;
+            Description = categoryDTO.Description;
+            IsActive = categoryDTO.IsActive;
+            CreatedByUserInfo = clsUser.Find(categoryDTO.CreatedByUserID.GetValueOrDefault());
+            CreatedAt = categoryDTO.CreatedAt;
+            UpdatedByUserInfo = clsUser.Find(categoryDTO.UpdatedByUserID.GetValueOrDefault());
+            UpdatedAt = categoryDTO.UpdatedAt;
+            Mode = enMode.Update;
         }
 
-        public static clsCategory Find(int categoryID)
+        public bool GetActivityStatus()
         {
-            clsCategoryDTO categoryDTO = clsProductCategoryData.FindProductCategoryByID(categoryID);
-            return categoryDTO is null ? null : new clsCategory(categoryDTO);
+            return IsActive;
         }
 
-        public static DataTable GetCategoryList()
+        public bool MarkAsActive()
         {
-            return clsProductCategoryData.GetCategoriesList();
+            return clsCategoryService.CreateInstance().MarkAsActive(this);
         }
 
-        public static string[] GetCategoryNames()
+        public bool MarkAsInActive()
         {
-            return clsUtils.GetColumnStringArray(
-                clsProductCategoryData.GetCategoriesList(),
-                "CategoryName"
-                );
+            return clsCategoryService.CreateInstance().MarkAsInActive(this);
+        }
+
+        public clsCategoryDTO MappingToDTO()
+        {
+            return new clsCategoryDTO
+            {
+                CategoryID = this.CategoryID.GetValueOrDefault(),
+                CategoryName = this.CategoryName,
+                Description = this.Description,
+                CreatedByUserID = this.CreatedByUserInfo?.UserID,
+                UpdatedByUserID = this.UpdatedByUserInfo?.UserID
+            };
+        }
+
+        public void TrimAllStringFields()
+        {
+            CategoryName = CategoryName.Trim();
+            Description = Description.Trim();
+        }
+
+        public clsValidationResult Validated()
+        {
+            clsValidationResult validationResult = new clsValidationResult();
+            TrimAllStringFields();
+
+            if (string.IsNullOrWhiteSpace(CategoryName))
+            {
+                validationResult.AddError("إسم الصنف/الفئة", "لا يمكن أن يكون إسم الصنف/الفئة فارغا");
+            }
+
+            return validationResult;
+        }
+
+        public clsValidationResult Save()
+        {
+            return clsCategoryService.CreateInstance().Save(this);
         }
 
     }

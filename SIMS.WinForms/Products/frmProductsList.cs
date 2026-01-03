@@ -18,7 +18,7 @@ namespace SIMS.WinForms.Products
         {
             cbProductActivity.SelectedIndex = 0;
             cbCategory.SelectedIndex = 0;
-            cbCategory.Items.AddRange(clsCategory.GetCategoryNames());
+            cbCategory.Items.AddRange(clsCategoryService.GetCategoryNames());
         }
 
         protected override void LoadData()

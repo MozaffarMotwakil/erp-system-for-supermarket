@@ -58,7 +58,7 @@ namespace SIMS.WinForms.Warehouses
                 cbInventoryStatus.SelectedIndex = 0;
 
             cbProduct.Items.AddRange(clsProductService.GetAllProductNames());
-            cbCategory.Items.AddRange(clsCategory.GetCategoryNames());
+            cbCategory.Items.AddRange(clsCategoryService.GetCategoryNames());
             cbUnit.Items.AddRange(clsUnit.GetAllUnitNames());
             cbWarehouse.Items.AddRange(clsWarehouseService.GetWarehouseNames());
 

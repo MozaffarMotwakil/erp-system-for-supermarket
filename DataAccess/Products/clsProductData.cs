@@ -278,13 +278,13 @@ namespace DataAccess.Products
                 );
         }
 
-        public static bool SetActive(int discountID, int updatedByUserID)
+        public static bool SetActive(int productID, int updatedByUserID)
         {
             return clsDataSettings.ExecuteSimpleSP(
                 "usp_Products_SetActive",
                 "@ProductID",
                 "@UpdatedByUserID",
-                discountID,
+                productID,
                 updatedByUserID
                 );
         }

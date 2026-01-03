@@ -39,7 +39,7 @@ namespace BusinessLogic.Products
             ProductID = null;
             ProductName = productName;
             Barcode = barcode;
-            CategoryInfo = clsCategory.Find(categoryID);
+            CategoryInfo = clsCategoryService.CreateInstance().Find(categoryID);
             MainUnitInfo = clsUnit.Find(mainUnitID);
             UnitConversions = unitConversions;
             MainSupplierInfo = clsSupplierService.CreateInstance().Find(mainSupplierID ?? -1);
@@ -54,7 +54,7 @@ namespace BusinessLogic.Products
             ProductID = productDTO.ProductID;
             ProductName = productDTO.ProductName;
             Barcode = productDTO.Barcode;
-            CategoryInfo = clsCategory.Find(productDTO.CategoryID);
+            CategoryInfo = clsCategoryService.CreateInstance().Find(productDTO.CategoryID);
             MainUnitInfo = clsUnit.Find(productDTO.MainUnitID);
             UnitConversions = clsProductUnitConversion.ConvertAlternativeUnitsTableToList(productDTO.UnitConversions);
             MainSupplierInfo = clsSupplierService.CreateInstance().Find(productDTO.MainSupplierID ?? -1);
@@ -109,7 +109,7 @@ namespace BusinessLogic.Products
 
         public void ChangeCategory(int newCategoryID)
         {
-            CategoryInfo = clsCategory.Find(newCategoryID);
+            CategoryInfo = clsCategoryService.CreateInstance().Find(newCategoryID);
         }
 
         public void ChangeMainUnit(int newUnitID)
@@ -148,7 +148,7 @@ namespace BusinessLogic.Products
                 ProductID = this.ProductID,
                 ProductName = this.ProductName,
                 Barcode = this.Barcode,
-                CategoryID = this.CategoryInfo.CategoryID,
+                CategoryID = this.CategoryInfo.CategoryID.GetValueOrDefault(),
                 MainUnitID = this.MainUnitInfo.UnitID,
                 UnitConversions = clsProductUnitConversion.ConvertAlternativeUnitsListToTable(this.UnitConversions),
                 MainSupplierID = this.MainSupplierInfo?.SupplierID,

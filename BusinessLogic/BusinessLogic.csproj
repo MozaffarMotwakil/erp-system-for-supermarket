@@ -72,6 +72,7 @@
     <Compile Include="Invoices\clsInvoiceLine.cs" />
     <Compile Include="Payments\clsPaymentService.cs" />
     <Compile Include="Payments\clsPayment.cs" />
+    <Compile Include="Products\clsCategoryService.cs" />
     <Compile Include="Products\clsTaxService.cs" />
     <Compile Include="Products\clsTaxItem.cs" />
     <Compile Include="Products\clsTax.cs" />
