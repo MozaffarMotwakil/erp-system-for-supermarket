@@ -73,6 +73,10 @@ namespace SIMS.WinForms.Suppliers
 
         private void frmAddEditSupplier_Load(object sender, EventArgs e)
         {
+            this.Text = FormMode is enMode.Add ?
+                "إضافة مورد جديد" :
+                "تعديل معلومات مورد";
+
             if (FormMode is enMode.Edit)
             {
                 if (_Supplier is null)

@@ -82,5 +82,10 @@ namespace SIMS.WinForms.Products
             addProduct.ShowDialog();
         }
 
+        private void CategoriesToolStripButton_Click(object sender, EventArgs e)
+        {
+            frmCategoriesList frmCategoriesList = new frmCategoriesList();
+            frmCategoriesList.ShowDialog();
+        }
     }
 }

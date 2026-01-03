@@ -151,6 +151,21 @@
     <Compile Include="Products\BaseTaxesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Products\BaseCategoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\frmAddEditCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\frmAddEditCategory.Designer.cs">
+      <DependentUpon>frmAddEditCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\frmCategoriesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\frmCategoriesList.Designer.cs">
+      <DependentUpon>frmCategoriesList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\frmAddEditTax.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -523,6 +538,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ctrProductInfo.resx">
       <DependentUpon>ctrProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\frmAddEditCategory.resx">
+      <DependentUpon>frmAddEditCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\frmCategoriesList.resx">
+      <DependentUpon>frmCategoriesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\frmAddEditTax.resx">
       <DependentUpon>frmAddEditTax.cs</DependentUpon>

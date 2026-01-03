@@ -66,6 +66,7 @@
             // 
             // lblTotalRecordsText
             // 
+            this.lblTotalRecordsText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalRecordsText.AutoSize = true;
             this.lblTotalRecordsText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalRecordsText.Location = new System.Drawing.Point(9, 691);

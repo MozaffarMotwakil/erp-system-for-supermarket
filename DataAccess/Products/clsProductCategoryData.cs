@@ -30,7 +30,9 @@ namespace DataAccess.Products
                                 {
                                     CategoryID = categoryID,
                                     CategoryName = Convert.ToString(reader["CategoryName"]),
-                                    Description = Convert.ToString(reader["Description"]),
+                                    Description = reader["Description"] != DBNull.Value ?
+                                    Convert.ToString(reader["Description"]) :
+                                    null,
                                     IsActive = Convert.ToBoolean(reader["IsActive"])
                                 };
                             }
@@ -55,7 +57,7 @@ namespace DataAccess.Products
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@CategoryName", categoryDTO.CategoryName);
-                    command.Parameters.AddWithValue("@Description", categoryDTO.Description);
+                    command.Parameters.AddWithValue("@Description", clsDataSettings.GetDBNullIfNullOrEmpty(categoryDTO.Description));
                     command.Parameters.AddWithValue("@CreatedByUserID", categoryDTO.CreatedByUserID);
 
                     SqlParameter returnValueParam = new SqlParameter
@@ -90,7 +92,7 @@ namespace DataAccess.Products
 
                     command.Parameters.AddWithValue("@CategoryID", categoryDTO.CategoryID);
                     command.Parameters.AddWithValue("@CategoryName", categoryDTO.CategoryName);
-                    command.Parameters.AddWithValue("@Description", categoryDTO.Description);
+                    command.Parameters.AddWithValue("@Description", clsDataSettings.GetDBNullIfNullOrEmpty(categoryDTO.Description));
                     command.Parameters.AddWithValue("@UpdatedByUserID", categoryDTO.UpdatedByUserID);
 
                     SqlParameter returnValueParam = new SqlParameter

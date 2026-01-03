@@ -33,6 +33,7 @@
             this.addProducrToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ctrProductInfo = new SIMS.WinForms.Products.ctrProductInfo();
             this.cbProductActivity = new System.Windows.Forms.ComboBox();
+            this.CategoriesToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.searchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -74,7 +75,8 @@
             this.toolStrip.AutoSize = false;
             this.toolStrip.BackColor = System.Drawing.Color.White;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addProducrToolStripButton});
+            this.addProducrToolStripButton,
+            this.CategoriesToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.ShowItemToolTips = false;
@@ -95,11 +97,11 @@
             // 
             // ctrProductInfo
             // 
+            this.ctrProductInfo.Entity = null;
             this.ctrProductInfo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrProductInfo.Location = new System.Drawing.Point(12, 43);
             this.ctrProductInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ctrProductInfo.Name = "ctrProductInfo";
-            this.ctrProductInfo.Entity = null;
             this.ctrProductInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ctrProductInfo.Size = new System.Drawing.Size(850, 270);
             this.ctrProductInfo.TabIndex = 46;
@@ -121,6 +123,17 @@
             this.cbProductActivity.Size = new System.Drawing.Size(200, 24);
             this.cbProductActivity.TabIndex = 50;
             this.cbProductActivity.SelectedIndexChanged += new System.EventHandler(this.cbProductActivity_SelectedIndexChanged);
+            // 
+            // CategoriesToolStripButton
+            // 
+            this.CategoriesToolStripButton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoriesToolStripButton.Image = global::SIMS.WinForms.Properties.Resources.dairy_products;
+            this.CategoriesToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.CategoriesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CategoriesToolStripButton.Name = "CategoriesToolStripButton";
+            this.CategoriesToolStripButton.Size = new System.Drawing.Size(112, 37);
+            this.CategoriesToolStripButton.Text = "   قائمة الفئات";
+            this.CategoriesToolStripButton.Click += new System.EventHandler(this.CategoriesToolStripButton_Click);
             // 
             // frmProductsList
             // 
@@ -162,5 +175,6 @@
         protected System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton addProducrToolStripButton;
         private System.Windows.Forms.ComboBox cbProductActivity;
+        private System.Windows.Forms.ToolStripButton CategoriesToolStripButton;
     }
 }
