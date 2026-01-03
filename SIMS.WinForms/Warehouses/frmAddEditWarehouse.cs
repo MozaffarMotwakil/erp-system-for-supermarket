@@ -56,8 +56,6 @@ namespace SIMS.WinForms.Warehouses
                 }
 
                 txtWarehouseName.Text = _Warehouse.WarehouseName;
-                rbActive.Checked = _Warehouse.IsActive;
-                rbInActive.Checked = !_Warehouse.IsActive;
                 rbSubWarehouse.Checked = !(rbMainWarehouse.Checked =
                     (_Warehouse.Type == clsWarehouse.enWarehouseType.MainWarehouse));
                 cbResponsibleEmployee.SelectedValue = _Warehouse.ResponsibleEmployeeInfo.EmployeeID;
@@ -101,8 +99,7 @@ namespace SIMS.WinForms.Warehouses
                     rbMainWarehouse.Checked ? 
                         clsWarehouse.enWarehouseType.MainWarehouse :
                         clsWarehouse.enWarehouseType.SubWarehouse, 
-                    (int)cbResponsibleEmployee.SelectedValue,
-                    rbActive.Checked
+                    (int)cbResponsibleEmployee.SelectedValue
                     );
             }
             else
@@ -117,8 +114,6 @@ namespace SIMS.WinForms.Warehouses
                 {
                     _Warehouse.UpdateResponsibleEmployee((int)cbResponsibleEmployee.SelectedValue);
                 }
-
-                _Warehouse.IsActive = rbActive.Checked;
             }
 
             clsValidationResult validationResult = clsWarehouseService.CreateInstance().Save(_Warehouse);

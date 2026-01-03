@@ -39,10 +39,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.rbInActive = new System.Windows.Forms.RadioButton();
-            this.rbActive = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.rbSubWarehouse = new System.Windows.Forms.RadioButton();
             this.rbMainWarehouse = new System.Windows.Forms.RadioButton();
@@ -52,7 +48,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbWarehouseInfo.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +63,7 @@
             this.panel1.Controls.Add(this.gbWarehouseInfo);
             this.panel1.Location = new System.Drawing.Point(13, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(577, 440);
+            this.panel1.Size = new System.Drawing.Size(577, 349);
             this.panel1.TabIndex = 0;
             // 
             // gbWarehouseInfo
@@ -81,14 +76,13 @@
             this.gbWarehouseInfo.Controls.Add(this.btnSave);
             this.gbWarehouseInfo.Controls.Add(this.txtAddress);
             this.gbWarehouseInfo.Controls.Add(this.label2);
-            this.gbWarehouseInfo.Controls.Add(this.panel2);
             this.gbWarehouseInfo.Controls.Add(this.panel3);
             this.gbWarehouseInfo.Controls.Add(this.txtWarehouseName);
             this.gbWarehouseInfo.Controls.Add(this.label1);
             this.gbWarehouseInfo.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbWarehouseInfo.Location = new System.Drawing.Point(7, 3);
+            this.gbWarehouseInfo.Location = new System.Drawing.Point(3, 3);
             this.gbWarehouseInfo.Name = "gbWarehouseInfo";
-            this.gbWarehouseInfo.Size = new System.Drawing.Size(558, 430);
+            this.gbWarehouseInfo.Size = new System.Drawing.Size(567, 339);
             this.gbWarehouseInfo.TabIndex = 26;
             this.gbWarehouseInfo.TabStop = false;
             this.gbWarehouseInfo.Text = "معلومات المخزن";
@@ -99,7 +93,7 @@
             this.cbResponsibleEmployee.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbResponsibleEmployee.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbResponsibleEmployee.FormattingEnabled = true;
-            this.cbResponsibleEmployee.Location = new System.Drawing.Point(22, 179);
+            this.cbResponsibleEmployee.Location = new System.Drawing.Point(21, 119);
             this.cbResponsibleEmployee.Name = "cbResponsibleEmployee";
             this.cbResponsibleEmployee.Size = new System.Drawing.Size(402, 24);
             this.cbResponsibleEmployee.TabIndex = 34;
@@ -111,7 +105,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(431, 182);
+            this.label6.Location = new System.Drawing.Point(439, 122);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 16);
@@ -122,9 +116,9 @@
             // 
             this.label4.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(18, 337);
+            this.label4.Location = new System.Drawing.Point(21, 304);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(524, 34);
+            this.label4.Size = new System.Drawing.Size(524, 33);
             this.label4.TabIndex = 30;
             this.label4.Text = "تنويه: لا يسمح بوجود أكثر من مخزن رئيسي واحد, في حال تعيين مخزن كمخزن رئيسي وكان " +
     "هناك مخزن رئيسي سابق فسيتم تغيير تصنيف المخزن الرئيسي السابق إلى مخزن فرعي بشكل " +
@@ -136,7 +130,7 @@
             this.btnCancle.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancle.Image = global::SIMS.WinForms.Properties.Resources.cancle;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancle.Location = new System.Drawing.Point(156, 383);
+            this.btnCancle.Location = new System.Drawing.Point(188, 260);
             this.btnCancle.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(114, 42);
@@ -149,7 +143,7 @@
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::SIMS.WinForms.Properties.Resources.save;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(278, 383);
+            this.btnSave.Location = new System.Drawing.Point(310, 260);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(114, 42);
@@ -161,7 +155,7 @@
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(22, 231);
+            this.txtAddress.Location = new System.Drawing.Point(21, 162);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtAddress.MaxLength = 255;
             this.txtAddress.Multiline = true;
@@ -174,66 +168,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(457, 231);
+            this.label2.Location = new System.Drawing.Point(465, 162);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 16);
             this.label2.TabIndex = 29;
             this.label2.Text = "عنوان المخزن:";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.rbInActive);
-            this.panel2.Controls.Add(this.rbActive);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(234, 126);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(323, 26);
-            this.panel2.TabIndex = 24;
-            // 
-            // rbInActive
-            // 
-            this.rbInActive.AutoSize = true;
-            this.rbInActive.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbInActive.Location = new System.Drawing.Point(39, 3);
-            this.rbInActive.Name = "rbInActive";
-            this.rbInActive.Size = new System.Drawing.Size(74, 20);
-            this.rbInActive.TabIndex = 6;
-            this.rbInActive.Text = "غير نشط";
-            this.rbInActive.UseVisualStyleBackColor = true;
-            // 
-            // rbActive
-            // 
-            this.rbActive.AutoSize = true;
-            this.rbActive.Checked = true;
-            this.rbActive.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbActive.Location = new System.Drawing.Point(138, 3);
-            this.rbActive.Name = "rbActive";
-            this.rbActive.Size = new System.Drawing.Size(52, 20);
-            this.rbActive.TabIndex = 5;
-            this.rbActive.TabStop = true;
-            this.rbActive.Text = "نشط";
-            this.rbActive.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(270, 5);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 16);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "الحالة:";
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.rbSubWarehouse);
             this.panel3.Controls.Add(this.rbMainWarehouse);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(236, 76);
+            this.panel3.Location = new System.Drawing.Point(236, 72);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(321, 26);
+            this.panel3.Size = new System.Drawing.Size(325, 26);
             this.panel3.TabIndex = 23;
             // 
             // rbSubWarehouse
@@ -264,7 +213,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(274, 5);
+            this.label3.Location = new System.Drawing.Point(283, 5);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 16);
@@ -286,7 +235,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(463, 32);
+            this.label1.Location = new System.Drawing.Point(472, 32);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 16);
@@ -299,7 +248,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancle;
-            this.ClientSize = new System.Drawing.Size(602, 464);
+            this.ClientSize = new System.Drawing.Size(602, 373);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -316,8 +265,6 @@
             this.panel1.ResumeLayout(false);
             this.gbWarehouseInfo.ResumeLayout(false);
             this.gbWarehouseInfo.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -333,10 +280,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton rbInActive;
-        private System.Windows.Forms.RadioButton rbActive;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton rbSubWarehouse;
         private System.Windows.Forms.RadioButton rbMainWarehouse;

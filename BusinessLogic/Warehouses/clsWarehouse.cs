@@ -85,15 +85,15 @@ namespace BusinessLogic.Warehouses
         public DateTime? UpdatedAt { get; }
         public enMode Mode { get; }
 
-        public clsWarehouse(string warehouseName, string address, enWarehouseType type,
-             int responsibleEmployeeID, bool isActive)
+        public clsWarehouse(string warehouseName, string address,
+            enWarehouseType type, int responsibleEmployeeID)
         {
             WarehouseID = null;
             WarehouseName = warehouseName;
             Address = address;
             Type = type;
             ResponsibleEmployeeInfo = clsEmployeeService.Find(responsibleEmployeeID);
-            IsActive = isActive;
+            IsActive = true;
             Mode = enMode.Add;
         }
 
