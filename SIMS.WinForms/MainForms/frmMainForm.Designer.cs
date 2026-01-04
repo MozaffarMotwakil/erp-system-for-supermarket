@@ -51,12 +51,18 @@
             this.PaymentsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.EmployeesToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.UsersToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ReportsToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BasicSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BasicPurchasesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BasicInventoriesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BasicFinatcialReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActivityLogToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.SettingsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.LogoutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.circularPictureBox = new ctrCircularPictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblCurrentFormName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -65,17 +71,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCurrentTime = new System.Windows.Forms.Label();
             this.ClockAndDateTimer = new System.Windows.Forms.Timer(this.components);
-            this.ReportsToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.BasicSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BasicPurchasesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BasicInventoriesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BasicFinatcialReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.circularPictureBox = new ctrCircularPictureBox();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -333,6 +333,53 @@
             this.UsersToolStripButton.Text = "المسخدمين و الصلاحيات";
             this.UsersToolStripButton.Click += new System.EventHandler(this.UsersToolStripButton_Click);
             // 
+            // ReportsToolStripButton
+            // 
+            this.ReportsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ReportsToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BasicSalesReportToolStripMenuItem,
+            this.BasicPurchasesReportToolStripMenuItem,
+            this.BasicInventoriesReportToolStripMenuItem,
+            this.BasicFinatcialReportToolStripMenuItem});
+            this.ReportsToolStripButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReportsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ReportsToolStripButton.Image")));
+            this.ReportsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ReportsToolStripButton.Name = "ReportsToolStripButton";
+            this.ReportsToolStripButton.Size = new System.Drawing.Size(249, 36);
+            this.ReportsToolStripButton.Text = "التقارير";
+            // 
+            // BasicSalesReportToolStripMenuItem
+            // 
+            this.BasicSalesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BasicSalesReportToolStripMenuItem.Name = "BasicSalesReportToolStripMenuItem";
+            this.BasicSalesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.BasicSalesReportToolStripMenuItem.Text = "تقرير المبيعات الشامل";
+            this.BasicSalesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicSalesReportToolStripMenuItem_Click);
+            // 
+            // BasicPurchasesReportToolStripMenuItem
+            // 
+            this.BasicPurchasesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BasicPurchasesReportToolStripMenuItem.Name = "BasicPurchasesReportToolStripMenuItem";
+            this.BasicPurchasesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.BasicPurchasesReportToolStripMenuItem.Text = "تقرير المشتريات الشامل";
+            this.BasicPurchasesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicPurchasesReportToolStripMenuItem_Click);
+            // 
+            // BasicInventoriesReportToolStripMenuItem
+            // 
+            this.BasicInventoriesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BasicInventoriesReportToolStripMenuItem.Name = "BasicInventoriesReportToolStripMenuItem";
+            this.BasicInventoriesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.BasicInventoriesReportToolStripMenuItem.Text = "تقرير المخزون الشامل";
+            this.BasicInventoriesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicInventoriesReportToolStripMenuItem_Click);
+            // 
+            // BasicFinatcialReportToolStripMenuItem
+            // 
+            this.BasicFinatcialReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BasicFinatcialReportToolStripMenuItem.Name = "BasicFinatcialReportToolStripMenuItem";
+            this.BasicFinatcialReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.BasicFinatcialReportToolStripMenuItem.Text = "التقرير المالي الشامل";
+            this.BasicFinatcialReportToolStripMenuItem.Click += new System.EventHandler(this.BasicFinatcialReportToolStripMenuItem_Click);
+            // 
             // ActivityLogToolStripButton
             // 
             this.ActivityLogToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -362,7 +409,7 @@
             this.LogoutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("LogoutToolStripButton.Image")));
             this.LogoutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.LogoutToolStripButton.Name = "LogoutToolStripButton";
-            this.LogoutToolStripButton.Size = new System.Drawing.Size(155, 36);
+            this.LogoutToolStripButton.Size = new System.Drawing.Size(249, 36);
             this.LogoutToolStripButton.Text = "تسجيل الخروج";
             this.LogoutToolStripButton.Click += new System.EventHandler(this.LogoutToolStripButton_Click);
             // 
@@ -398,6 +445,17 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "مظفر متوكل خضر سلمان";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // circularPictureBox
+            // 
+            this.circularPictureBox.BackColor = System.Drawing.Color.White;
+            this.circularPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("circularPictureBox.Image")));
+            this.circularPictureBox.Location = new System.Drawing.Point(49, 3);
+            this.circularPictureBox.Name = "circularPictureBox";
+            this.circularPictureBox.Size = new System.Drawing.Size(150, 150);
+            this.circularPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.circularPictureBox.TabIndex = 2;
+            this.circularPictureBox.TabStop = false;
             // 
             // panel2
             // 
@@ -491,64 +549,7 @@
             // ClockAndDateTimer
             // 
             this.ClockAndDateTimer.Interval = 1000;
-            // 
-            // ReportsToolStripButton
-            // 
-            this.ReportsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ReportsToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BasicSalesReportToolStripMenuItem,
-            this.BasicPurchasesReportToolStripMenuItem,
-            this.BasicInventoriesReportToolStripMenuItem,
-            this.BasicFinatcialReportToolStripMenuItem});
-            this.ReportsToolStripButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReportsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ReportsToolStripButton.Image")));
-            this.ReportsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ReportsToolStripButton.Name = "ReportsToolStripButton";
-            this.ReportsToolStripButton.Size = new System.Drawing.Size(249, 36);
-            this.ReportsToolStripButton.Text = "التقارير";
-            // 
-            // BasicSalesReportToolStripMenuItem
-            // 
-            this.BasicSalesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasicSalesReportToolStripMenuItem.Name = "BasicSalesReportToolStripMenuItem";
-            this.BasicSalesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.BasicSalesReportToolStripMenuItem.Text = "تقرير المبيعات الشامل";
-            this.BasicSalesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicSalesReportToolStripMenuItem_Click);
-            // 
-            // BasicPurchasesReportToolStripMenuItem
-            // 
-            this.BasicPurchasesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasicPurchasesReportToolStripMenuItem.Name = "BasicPurchasesReportToolStripMenuItem";
-            this.BasicPurchasesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.BasicPurchasesReportToolStripMenuItem.Text = "تقرير المشتريات الشامل";
-            this.BasicPurchasesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicPurchasesReportToolStripMenuItem_Click);
-            // 
-            // BasicInventoriesReportToolStripMenuItem
-            // 
-            this.BasicInventoriesReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasicInventoriesReportToolStripMenuItem.Name = "BasicInventoriesReportToolStripMenuItem";
-            this.BasicInventoriesReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.BasicInventoriesReportToolStripMenuItem.Text = "تقرير المخزون الشامل";
-            this.BasicInventoriesReportToolStripMenuItem.Click += new System.EventHandler(this.BasicInventoriesReportToolStripMenuItem_Click);
-            // 
-            // BasicFinatcialReportToolStripMenuItem
-            // 
-            this.BasicFinatcialReportToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasicFinatcialReportToolStripMenuItem.Name = "BasicFinatcialReportToolStripMenuItem";
-            this.BasicFinatcialReportToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.BasicFinatcialReportToolStripMenuItem.Text = "التقرير المالي الشامل";
-            this.BasicFinatcialReportToolStripMenuItem.Click += new System.EventHandler(this.BasicFinatcialReportToolStripMenuItem_Click);
-            // 
-            // circularPictureBox
-            // 
-            this.circularPictureBox.BackColor = System.Drawing.Color.White;
-            this.circularPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("circularPictureBox.Image")));
-            this.circularPictureBox.Location = new System.Drawing.Point(49, 3);
-            this.circularPictureBox.Name = "circularPictureBox";
-            this.circularPictureBox.Size = new System.Drawing.Size(150, 150);
-            this.circularPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.circularPictureBox.TabIndex = 2;
-            this.circularPictureBox.TabStop = false;
+            this.ClockAndDateTimer.Tick += new System.EventHandler(this.ClockAndDateTimer_Tick);
             // 
             // frmMainForm
             // 
@@ -573,10 +574,10 @@
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

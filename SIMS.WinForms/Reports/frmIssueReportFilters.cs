@@ -91,6 +91,7 @@ namespace SIMS.WinForms.Reports
                 reportViewer.LocalReport.DataSources.Add(new ReportDataSource("BasicPurchasesReport", basicPurchasesReport));
             }
 
+            reportViewer.LocalReport.DisplayName = _ReportName;
             reportViewer.RefreshReport();
             reportViewerForm.ShowDialog();
         }

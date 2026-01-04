@@ -177,7 +177,7 @@ namespace SIMS.WinForms.Products
 
         private void ClsSupplier_SupplierSaved(object sender, EntitySavedEventArgs e)
         {
-            cbMainSupplier.DataSource = clsWarehouseService.GetWarehousesList();
+            cbMainSupplier.DataSource = clsSupplierService.GetActiveSuppliersList();
             cbMainSupplier.ValueMember = "SupplierID";
             cbMainSupplier.DisplayMember = "SupplierName";
 
