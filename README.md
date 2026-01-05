@@ -162,6 +162,9 @@ This resulted in:
 ### Purchases Report (Comprehensive)
 ![Purchases Report](screenshots/purchase-report.png)
 
+### Database Schema
+![Database Schema](screenshots/database-schema.png)
+
 ---
 
 ## 📌 Notes
