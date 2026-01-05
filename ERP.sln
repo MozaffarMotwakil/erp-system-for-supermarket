@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIMS.WinForms", "SIMS.WinForms\SIMS.WinForms.csproj", "{E6927B04-ABC3-4F81-BD11-ED78304039ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForms", "SIMS.WinForms\WinForms.csproj", "{E6927B04-ABC3-4F81-BD11-ED78304039ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{71BFADD6-CD8C-4449-81DF-BA72F4B86C79}"
 EndProject
