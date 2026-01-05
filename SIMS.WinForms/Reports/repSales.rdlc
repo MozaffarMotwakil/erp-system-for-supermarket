@@ -718,7 +718,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>نسبة الربح</Value>
+                                  <Value>معدل الربح/الخسارة</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Times New Roman</FontFamily>
@@ -1952,7 +1952,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>صافي الربح</Value>
+                                  <Value>صافي الربح/الخسارة</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Times New Roman</FontFamily>
