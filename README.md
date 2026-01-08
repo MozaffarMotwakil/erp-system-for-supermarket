@@ -90,41 +90,83 @@ This resulted in:
 - A consistent user experience across the system
 
 ---
-
 ## 📦 System Scope & Core Modules
 
-### 📦 Advanced Inventory & Warehouse Management (Core Module)
-- Three-dimensional inventory tracking: **(Product – Unit – Warehouse)**
-- Multiple warehouses:
-  - Store Warehouse (fixed, non-editable)
-  - Main Warehouse
-  - Sub-Warehouses
-- Strict and auditable **stock transfer logic**
-- Stock Movement system logging every inbound/outbound operation
+### 🤝 Suppliers Management
+- Full management of suppliers and all related operations  
+- Supplier product lists to track supplied items  
+- Detailed tracking of purchase transactions and purchase returns  
+
+---
+
+### 🧩 Products Management
+- Management of products and product categories  
+- Support for **alternative units** per product  
+- Centralized handling of all product-related operations  
+
+---
+
+### 🏷️ Dynamic Discounts & Tax System (Sales-Oriented)
+- Discount system linked to **Product + Unit** level  
+- Tax system linked to the **Product level**, applying to all its units  
+- Ensures accurate pricing and consistent sales calculations  
+
+---
+
+### 📦 Warehouses & Inventory Management (Core Module)
+- Management of multiple warehouse types:
+  - **Store Warehouse** (system-defined, fixed, non-editable)
+  - **Main Warehouse** (single instance)
+  - **Sub-Warehouses** (unlimited)
+- Advanced inventory system where each stock item represents:  
+  **(Product + Unit + Warehouse)**
+- Enables precise tracking of available quantities for each product unit in each warehouse
+- Complete handling of all inventory-related operations (inventory is a core system concept)
+- Internal stock transfer operations between warehouses
 - Dedicated screens for:
-  - Inventory movements
-  - Transfer operations and details
-- Support for **alternative units**, enabling flexible purchasing, stocking, and selling
+  - Inventory movement tracking
+  - Stock transfer operations with extended details
+- Stock Movement module logs **every inbound and outbound transaction**
+- Database design prepared for future operations such as:
+  - Inventory adjustments
+  - Unit conversions
+  - Additional inventory workflows  
+- This module represents the **most complex and time-intensive part of the system**, functioning as a standalone **Inventory Management System** within the ERP  
 
-### 🏷️ Dynamic Discounts & Tax System
-- Discounts linked to **Product + Unit**
-- Tax system linked to **Product level**
-- Ensures accurate pricing and financial compliance
+---
 
-### 🤝 Suppliers & Purchasing
-- Full supplier management
-- Complete purchase cycle with purchase returns
-- Real-time inventory updates
+### 🧾 Invoicing Module
+- Purchase invoices and purchase returns  
+- Sales invoices and sales returns  
+- Comprehensive invoice lifecycle handling, including:
+  - Fully paid invoices
+  - Partially paid invoices
+  - Unpaid invoices
+- Issuing payment vouchers for unpaid or partially paid invoices  
 
-### 💰 Sales & Financial Operations
-- Sales invoices and sales returns
-- Payments & Receipts module
-- Tracks cash flow within an administrative (non-accounting) context
+---
 
-### 📊 Reporting System
-- Analytical reports generated from the centralized database
-- Represents the **true value** of integrating all system modules
+### 💰 Payments & Receipts Module
+- Tracks cash flow through:
+  - Cash payments
+  - Bank transfers
+- Represents the current **financial component** of the system  
+- Designed as part of an **MIS (Management Information System)**  
+- Prepared for future integration with a full **AIS (Accounting Information System)**, where:
+  - AIS will handle accounting logic
+  - Payments/Receipts will focus purely on cash flow tracking  
 
+---
+
+### 📊 Reporting Module
+- The most critical module and the ultimate output of the entire system  
+- Represents the analytical value of the centralized database  
+- Designed to support management decision-making  
+- Currently includes:
+  - **Comprehensive Sales Report**
+  - **Comprehensive Purchases Report**
+- Database structure allows generating dozens of additional analytical reports in the future; however, the MVP focuses on the two most essential reports for efficiency
+  
 ---
 
 ## 🖼️ Screenshots (Placeholders)
