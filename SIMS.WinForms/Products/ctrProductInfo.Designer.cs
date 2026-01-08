@@ -66,10 +66,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
             this.SuppliersContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ShowSupplierInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SuppliedItemsLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageInventories = new System.Windows.Forms.TabPage();
             this.dgvInventories = new System.Windows.Forms.DataGridView();
             this.InventoriesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.عرضحركاتالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.تعديلحدإعادةالطلبToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageStockTransactions = new System.Windows.Forms.TabPage();
             this.cbRange = new System.Windows.Forms.ComboBox();
@@ -82,8 +84,7 @@
             this.StockTransactionsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.عرضتفاصيلالفاتورةToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.عرضحركاتالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ShowSupplierInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GoToInventoriesListtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.pageBasicInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbProductImage)).BeginInit();
@@ -495,8 +496,17 @@
             this.SuppliedItemsLogToolStripMenuItem});
             this.SuppliersContextMenuStrip.Name = "SuppliersContextMenuStrip";
             this.SuppliersContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.SuppliersContextMenuStrip.Size = new System.Drawing.Size(199, 102);
+            this.SuppliersContextMenuStrip.Size = new System.Drawing.Size(199, 80);
             this.SuppliersContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.SuppliersContextMenuStrip_Opening);
+            // 
+            // ShowSupplierInfoToolStripMenuItem
+            // 
+            this.ShowSupplierInfoToolStripMenuItem.Image = global::SIMS.WinForms.Properties.Resources.supplier_32;
+            this.ShowSupplierInfoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowSupplierInfoToolStripMenuItem.Name = "ShowSupplierInfoToolStripMenuItem";
+            this.ShowSupplierInfoToolStripMenuItem.Size = new System.Drawing.Size(198, 38);
+            this.ShowSupplierInfoToolStripMenuItem.Text = "عرض معلومات المورد";
+            this.ShowSupplierInfoToolStripMenuItem.Click += new System.EventHandler(this.ShowSupplierInfoToolStripMenuItem_Click);
             // 
             // SuppliedItemsLogToolStripMenuItem
             // 
@@ -558,12 +568,22 @@
             // InventoriesContextMenuStrip
             // 
             this.InventoriesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GoToInventoriesListtoolStripMenuItem,
             this.عرضحركاتالمخزونToolStripMenuItem,
             this.تعديلحدإعادةالطلبToolStripMenuItem});
             this.InventoriesContextMenuStrip.Name = "contextMenuStrip2";
             this.InventoriesContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.InventoriesContextMenuStrip.Size = new System.Drawing.Size(199, 80);
+            this.InventoriesContextMenuStrip.Size = new System.Drawing.Size(201, 140);
             this.InventoriesContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.InventoriesContextMenuStrip_Opening);
+            // 
+            // عرضحركاتالمخزونToolStripMenuItem
+            // 
+            this.عرضحركاتالمخزونToolStripMenuItem.Image = global::SIMS.WinForms.Properties.Resources.stock_market;
+            this.عرضحركاتالمخزونToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.عرضحركاتالمخزونToolStripMenuItem.Name = "عرضحركاتالمخزونToolStripMenuItem";
+            this.عرضحركاتالمخزونToolStripMenuItem.Size = new System.Drawing.Size(200, 38);
+            this.عرضحركاتالمخزونToolStripMenuItem.Text = "عرض حركات المخزون";
+            this.عرضحركاتالمخزونToolStripMenuItem.Click += new System.EventHandler(this.ShowTransactionLog_Click);
             // 
             // تعديلحدإعادةالطلبToolStripMenuItem
             // 
@@ -571,7 +591,7 @@
             this.تعديلحدإعادةالطلبToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.تعديلحدإعادةالطلبToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.تعديلحدإعادةالطلبToolStripMenuItem.Name = "تعديلحدإعادةالطلبToolStripMenuItem";
-            this.تعديلحدإعادةالطلبToolStripMenuItem.Size = new System.Drawing.Size(198, 38);
+            this.تعديلحدإعادةالطلبToolStripMenuItem.Size = new System.Drawing.Size(200, 38);
             this.تعديلحدإعادةالطلبToolStripMenuItem.Text = "تعديل حد إعادة الطلب";
             this.تعديلحدإعادةالطلبToolStripMenuItem.Click += new System.EventHandler(this.UpdateReorderQuantity_Click);
             // 
@@ -742,23 +762,14 @@
             this.toolStripMenuItem1.Text = "عرض تفاصيل عملية النقل";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.ShowTransferOperationInfo_Click);
             // 
-            // عرضحركاتالمخزونToolStripMenuItem
+            // GoToInventoriesListtoolStripMenuItem
             // 
-            this.عرضحركاتالمخزونToolStripMenuItem.Image = global::SIMS.WinForms.Properties.Resources.stock_market;
-            this.عرضحركاتالمخزونToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.عرضحركاتالمخزونToolStripMenuItem.Name = "عرضحركاتالمخزونToolStripMenuItem";
-            this.عرضحركاتالمخزونToolStripMenuItem.Size = new System.Drawing.Size(198, 38);
-            this.عرضحركاتالمخزونToolStripMenuItem.Text = "عرض حركات المخزون";
-            this.عرضحركاتالمخزونToolStripMenuItem.Click += new System.EventHandler(this.ShowTransactionLog_Click);
-            // 
-            // ShowSupplierInfoToolStripMenuItem
-            // 
-            this.ShowSupplierInfoToolStripMenuItem.Image = global::SIMS.WinForms.Properties.Resources.supplier_32;
-            this.ShowSupplierInfoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ShowSupplierInfoToolStripMenuItem.Name = "ShowSupplierInfoToolStripMenuItem";
-            this.ShowSupplierInfoToolStripMenuItem.Size = new System.Drawing.Size(198, 38);
-            this.ShowSupplierInfoToolStripMenuItem.Text = "عرض معلومات المورد";
-            this.ShowSupplierInfoToolStripMenuItem.Click += new System.EventHandler(this.ShowSupplierInfoToolStripMenuItem_Click);
+            this.GoToInventoriesListtoolStripMenuItem.Image = global::SIMS.WinForms.Properties.Resources.warehouse;
+            this.GoToInventoriesListtoolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.GoToInventoriesListtoolStripMenuItem.Name = "GoToInventoriesListtoolStripMenuItem";
+            this.GoToInventoriesListtoolStripMenuItem.Size = new System.Drawing.Size(200, 38);
+            this.GoToInventoriesListtoolStripMenuItem.Text = "الإنتقال لقائمة المخزون";
+            this.GoToInventoriesListtoolStripMenuItem.Click += new System.EventHandler(this.GoToInventoriesListtoolStripMenuItem_Click);
             // 
             // ctrProductInfo
             // 
@@ -840,5 +851,6 @@
         private System.Windows.Forms.ToolStripMenuItem SuppliedItemsLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem عرضحركاتالمخزونToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ShowSupplierInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GoToInventoriesListtoolStripMenuItem;
     }
 }

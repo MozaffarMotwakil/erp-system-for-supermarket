@@ -26,9 +26,6 @@ namespace SIMS.WinForms.Suppliers
             InitializeComponent();
         }
 
-        private clsSupplier _Supplier;
-        private clsInvoice _SelectedInvoice =>
-            clsInvoiceService.CreateInstance().Find(Convert.ToInt32(_GetCurrentDGV()?.SelectedRows[0]?.Cells["InvoiceID"].Value));
         public clsSupplier Entity
         {
             get
@@ -72,30 +69,39 @@ namespace SIMS.WinForms.Suppliers
                 _LoadDataForPaymentPage();
             }
         }
+        private clsSupplier _Supplier;
+        private clsInvoice _SelectedInvoice
+        {
+            get
+            {
+                return _CurrentDGV.SelectedRows.Count != 0 ?
+                    clsInvoiceService.CreateInstance().Find(Convert.ToInt32(_CurrentDGV?.SelectedRows[0]?.Cells["InvoiceID"].Value)) :
+                    null;
+            }
+        }
+        private DataGridView _CurrentDGV
+        {
+            get
+            {
+                return tabControl.SelectedTab == pageInvoices ?
+                    dgvInvoices :
+                    tabControl.SelectedTab == pagePayments ?
+                    dgvPayments :
+                    null;
+            }
+        }
 
         #region Control
-        private void ctrSupplierInfo_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private DataGridView _GetCurrentDGV()
-        {
-            return tabControl.SelectedTab == pageInvoices ?
-                dgvInvoices :
-                tabControl.SelectedTab == pagePayments ?
-                dgvPayments :
-                null;
-        }
-
         private void ShowInvoiceDetails_Click(object sender, EventArgs e)
         {
-            if (_GetCurrentDGV()?.SelectedRows.Count == 0)
+            clsInvoice invoice = _SelectedInvoice;
+
+            if (invoice == null)
             {
                 return;
             }
 
-            frmShowInvoiceInfo showInvoiceInfo = new frmShowInvoiceInfo(_SelectedInvoice);
+            frmShowInvoiceInfo showInvoiceInfo = new frmShowInvoiceInfo(invoice);
             showInvoiceInfo.ShowPartyInfo = false;
             showInvoiceInfo.ShowDialog();
         }
@@ -132,7 +138,12 @@ namespace SIMS.WinForms.Suppliers
 
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            clsFormHelper.PreventContextMenuOnEmptyClick(_GetCurrentDGV(), e);
+            clsFormHelper.PreventContextMenuOnEmptyClick(_CurrentDGV, e);
+
+            if (_CurrentDGV != null && _CurrentDGV.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -261,7 +272,7 @@ namespace SIMS.WinForms.Suppliers
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            DataGridView currentDGV = _GetCurrentDGV();
+            DataGridView currentDGV = _CurrentDGV;
 
             if (currentDGV.Rows.Count == 0) return;
 
@@ -439,6 +450,11 @@ namespace SIMS.WinForms.Suppliers
         private void SuppliesProductsContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvSuppliedProducts, e);
+
+            if (_CurrentDGV != null && _CurrentDGV.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void dgvSuppliedProducts_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -537,6 +553,7 @@ namespace SIMS.WinForms.Suppliers
         private void AfterIssueReturnInvoice_EntitySaved(object sender, EntitySavedEventArgs e)
         {
             _LoadDataForInvoicesPage();
+            _LoadDataForPaymentPage();
         }
 
         private void AfterIssueNewPayment_EntitySaved(object sender, EntitySavedEventArgs e)
@@ -567,15 +584,38 @@ namespace SIMS.WinForms.Suppliers
 
         private void IssuePayment_Click(object sender, EventArgs e)
         {
-            frmIssuePayment issuePayment = new frmIssuePayment(_SelectedInvoice);
+            clsPurchaseInvoice invoice = _SelectedInvoice as clsPurchaseInvoice;
+
+            if (invoice == null)
+            {
+                clsFormMessages.ShowError($"لم يتم العثور على الفاتورة");
+                return;
+            }
+
+            frmIssuePayment issuePayment = new frmIssuePayment(invoice);
             issuePayment.ShowDialog();
         }
 
         private void InvoicesContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
+            clsFormHelper.PreventContextMenuOnEmptyClick(_CurrentDGV, e);
+
+            if (_CurrentDGV != null && _CurrentDGV.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            clsInvoice invoice = _SelectedInvoice;
+
+            if (invoice == null)
+            {
+                return;
+            }
+
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvInvoices, e);
-            InvoicesContextMenuStrip.Items[1].Visible = _SelectedInvoice.InvoiceType == enInvoiceType.Purchase;
-            InvoicesContextMenuStrip.Items[2].Enabled = _SelectedInvoice.PaymentStatus != enPaymentStatus.Paid;
+            InvoicesContextMenuStrip.Items[1].Visible = invoice.InvoiceType == enInvoiceType.Purchase;
+            InvoicesContextMenuStrip.Items[2].Enabled = invoice.PaymentStatus != enPaymentStatus.Paid;
         }
 
         private void dgvInvoices_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

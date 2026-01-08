@@ -271,6 +271,12 @@ namespace SIMS.WinForms.BaseForms
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvEntitiesList, e);
 
+            if (dgvEntitiesList.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             if (IsEntitySupportActivityStatus)
             {
                 contextMenuStrip.Items["itemActive"].Visible = 

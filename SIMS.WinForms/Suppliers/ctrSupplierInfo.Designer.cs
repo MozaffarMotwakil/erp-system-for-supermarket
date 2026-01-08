@@ -779,7 +779,6 @@
             this.Name = "ctrSupplierInfo";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Size = new System.Drawing.Size(800, 270);
-            this.Load += new System.EventHandler(this.ctrSupplierInfo_Load);
             this.tabControl.ResumeLayout(false);
             this.pageBasicInfo.ResumeLayout(false);
             this.pageSuppliedProducts.ResumeLayout(false);

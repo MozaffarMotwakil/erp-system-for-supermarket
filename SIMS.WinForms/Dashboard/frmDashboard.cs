@@ -226,6 +226,11 @@ namespace SIMS.WinForms.Dashboard
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvRunningLowProducts, e);
+
+            if (dgvRunningLowProducts.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         public void LoadCategoryChart(List<clsCategorySales> categoriesSales)

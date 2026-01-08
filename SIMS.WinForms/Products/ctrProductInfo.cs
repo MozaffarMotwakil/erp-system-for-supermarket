@@ -317,6 +317,11 @@ namespace SIMS.WinForms.Products
         private void SuppliersContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvSuppliers, e);
+
+            if (dgvSuppliers.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void dgvSuppliers_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -404,6 +409,31 @@ namespace SIMS.WinForms.Products
             }
         }
 
+        private void GoToInventoriesListtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvInventories.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            clsInventory currentInventory = clsInventoryService.CreateInstance().Find(clsFormHelper.GetSelectedRowID(dgvInventories, "InventoryID"));
+
+            if (currentInventory != null)
+            {
+                frmInventoriesList inventoriesList = new frmInventoriesList(
+                    productName: currentInventory.ProductInfo.ProductName,
+                    unitName: currentInventory.UnitInfo.UnitName,
+                    warehouseName: currentInventory.WarehouseInfo.WarehouseName
+                    );
+
+                frmMainForm.OpenForm(inventoriesList);
+            }
+            else
+            {
+                clsFormMessages.ShowError("لم يتم العثور على المخزون");
+            }
+        }
+
         private void dgvInventories_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             clsFormHelper.ApplyGreenYellowRedRowStyle(dgvInventories, e, "InventoryStatus", "آمن", "منخفض", "نفذ");
@@ -420,6 +450,11 @@ namespace SIMS.WinForms.Products
         private void InventoriesContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvInventories, e);
+
+            if (dgvInventories.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private int _GetSelectedInventoryID()
@@ -565,6 +600,12 @@ namespace SIMS.WinForms.Products
         private void stockTransactionsContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             clsFormHelper.PreventContextMenuOnEmptyClick(dgvStockTransactions, e);
+
+            if (dgvStockTransactions.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
 
             if (dgvStockTransactions.CurrentRow.Index >= 0)
             {
