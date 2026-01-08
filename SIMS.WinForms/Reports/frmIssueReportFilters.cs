@@ -64,8 +64,8 @@ namespace SIMS.WinForms.Reports
 
             if (_ReportName.Contains("مبيعات"))
             {
-                reportViewer.LocalReport.ReportPath = 
-                    "C:\\Users\\mozaf\\GitHub\\sales-and-inventory-management-system\\SIMS.WinForms\\Reports\\repSales.rdlc";
+                reportViewer.LocalReport.ReportPath =
+                    "C:\\Users\\mozaf\\GitHub\\erp-system-for-supermarket\\SIMS.WinForms\\Reports\\repSales.rdlc";
 
                 List<clsBasicSalesReport> basicSalesReport = new List<clsBasicSalesReport>
                 {
@@ -79,7 +79,7 @@ namespace SIMS.WinForms.Reports
             else
             {
                 reportViewer.LocalReport.ReportPath =
-                    "C:\\Users\\mozaf\\GitHub\\sales-and-inventory-management-system\\SIMS.WinForms\\Reports\\repPurchases.rdlc";
+                    "C:\\Users\\mozaf\\GitHub\\erp-system-for-supermarket\\SIMS.WinForms\\Reports\\repPurchases.rdlc";
 
                 List<clsBasicPurchasesReport> basicPurchasesReport = new List<clsBasicPurchasesReport>
                 {
