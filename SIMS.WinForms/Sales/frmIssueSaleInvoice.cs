@@ -126,6 +126,19 @@ namespace SIMS.WinForms.Sales
                     .Select(line => line.ProductID.Value)
                     .ToList();
 
+                List<int> selectedProductIDsWithoutUnit = dgvInvoiceLines
+                            .Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(
+                                invoiceLine =>
+                                !invoiceLine.IsNewRow &&
+                                (invoiceLine.Cells[colProduct.Index] as DataGridViewComboBoxCell).Value != null &&
+                                (invoiceLine.Cells[colUnit.Index] as DataGridViewComboBoxCell).Value == null
+                            )
+                            .Select(invoiceLine => Convert.ToInt32(invoiceLine.Cells[colProduct.Index].Value))
+                            .Distinct()
+                            .ToList();
+
                 DataGridViewComboBoxCell boxCell = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
 
                 boxCell.DataSource = _WarehouseAvailableInventories
@@ -133,10 +146,11 @@ namespace SIMS.WinForms.Sales
                     .Select(group => group.First().ProductInfo)
                     .Where(
                         product =>
-                        !selectedProductIDs.Contains(product.ProductID.Value) ||
+                        !selectedProductIDsWithoutUnit.Contains(product.ProductID.Value) &&
+                        (!selectedProductIDs.Contains(product.ProductID.Value) ||
                         GetSelectedProductUnitIDs(product.ProductID.Value).Count !=_WarehouseAvailableInventories
                             .Where(inventory => inventory.ProductInfo.ProductID == product.ProductID)
-                            .Count()
+                            .Count())
                     )
                     .OrderBy(product => product.ProductName)
                     .ToList();
@@ -183,7 +197,6 @@ namespace SIMS.WinForms.Sales
             {
                 if (IsCurrentCellEmpty() && IsCurrentRowHasData())
                 {
-                    e.Cancel = true;
                     dgvInvoiceLines.CurrentRow.ErrorText = "يجب إختيار منتج";
                     SystemSounds.Asterisk.Play();
                 }
@@ -197,7 +210,6 @@ namespace SIMS.WinForms.Sales
             {
                 if (IsCurrentCellEmpty() && IsCurrentRowHasData())
                 {
-                    e.Cancel = true;
                     dgvInvoiceLines.CurrentRow.ErrorText = "يجب إختيار وحدة";
                     SystemSounds.Asterisk.Play();
                 }

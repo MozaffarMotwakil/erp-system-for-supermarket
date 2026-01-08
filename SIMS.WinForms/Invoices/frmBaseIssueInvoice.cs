@@ -122,7 +122,8 @@ namespace SIMS.WinForms.Invoices
 
         private void dgvInvoiceLines_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.ColumnIndex == dgvInvoiceLines.Columns[colDelete.Index].Index && e.RowIndex != dgvInvoiceLines.RowCount - 1)
+            if (e.RowIndex != -1 && e.ColumnIndex != -1 && e.RowIndex != dgvInvoiceLines.NewRowIndex &&
+                e.ColumnIndex == dgvInvoiceLines.Columns[colDelete.Index].Index)
             {
                 DialogResult result = MessageBox.Show("هل أنت متأكد من أنك تريد حذف هذا السطر ؟", "تأكيد",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -146,11 +147,8 @@ namespace SIMS.WinForms.Invoices
             dgvInvoiceLines.CurrentCell.Tag = dgvInvoiceLines.CurrentCell.Value;
         }
 
-        protected virtual void dgvInvoiceLines_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        protected virtual void dgvInvoiceLines_CellEndEdit(object sender, DataGridViewCellEventArgs e) { }
+     
         protected virtual void dgvInvoiceLines_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) { }
 
         protected object GetLastValueOfCell()
