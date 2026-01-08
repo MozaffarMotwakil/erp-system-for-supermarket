@@ -70,7 +70,7 @@ namespace BusinessLogic.Invoices
                 TotalDiscountAmount = this.TotalDiscountAmount,
                 TotalTaxAmount = this.TotalTaxAmount,
                 GrandTotal = this.GrandTotal,
-                PaymentMethodID = (byte)this.PaymentMethod,
+                PaymentMethodID = (byte?)this.PaymentMethod,
                 PaidAmount = this.PaidAmount,
                 WarehouseID = this?.WarehouseInfo?.WarehouseID ?? -1,
                 OriginalInvoiceID = OriginalInvoiceInfo?.InvoiceID,
