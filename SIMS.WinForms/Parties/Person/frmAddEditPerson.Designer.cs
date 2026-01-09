@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditPerson));
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblFormTitle = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -45,11 +44,6 @@
             this.errorProvider.ContainerControl = this;
             resources.ApplyResources(this.errorProvider, "errorProvider");
             // 
-            // lblFormTitle
-            // 
-            resources.ApplyResources(this.lblFormTitle, "lblFormTitle");
-            this.lblFormTitle.Name = "lblFormTitle";
-            // 
             // panel
             // 
             this.panel.BackColor = System.Drawing.Color.White;
@@ -57,7 +51,6 @@
             this.panel.Controls.Add(this.btnCancle);
             this.panel.Controls.Add(this.btnSave);
             this.panel.Controls.Add(this.ctrAddEditPerson);
-            this.panel.Controls.Add(this.lblFormTitle);
             resources.ApplyResources(this.panel, "panel");
             this.panel.Name = "panel";
             // 
@@ -82,6 +75,7 @@
             // 
             resources.ApplyResources(this.ctrAddEditPerson, "ctrAddEditPerson");
             this.ctrAddEditPerson.Name = "ctrAddEditPerson";
+            this.ctrAddEditPerson.PersonType = BusinessLogic.Parties.clsParty.enPartyType.Supplier;
             // 
             // frmAddEditPerson
             // 
@@ -106,7 +100,6 @@
 
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.Label lblFormTitle;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnSave;
         private ctrAddEditPerson ctrAddEditPerson;

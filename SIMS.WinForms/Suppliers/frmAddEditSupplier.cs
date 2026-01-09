@@ -77,6 +77,8 @@ namespace SIMS.WinForms.Suppliers
                 "إضافة مورد جديد" :
                 "تعديل معلومات مورد";
 
+            this.Text += " - " + (SupplierCategory == clsParty.enPartyCategory.Person ? "شخص" : "منظمة"); 
+
             if (FormMode is enMode.Edit)
             {
                 if (_Supplier is null)

@@ -25,40 +25,37 @@ namespace SIMS.WinForms.Parties.Person
             {
                 _PersonType = value;
 
-                if (FormMode is enMode.Add)
+                switch (_PersonType)
                 {
-                    switch (_PersonType)
-                    {
-                        case enPartyType.Employee:
-                            ctrAddEditPerson.PersonType = enPartyType.Employee;
-                            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                                "إضافة موظف جديد" :
-                                "تعديل بيانات موظف";
-                            break;
-                        case enPartyType.Customer:
-                            ctrAddEditPerson.PersonType = enPartyType.Customer;
-                            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                                "إضافة عميل جديد" :
-                                "تعديل بيانات عميل";
-                            break;
-                        case enPartyType.Supplier:
-                            ctrAddEditPerson.PersonType = enPartyType.Supplier;
-                            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                                "إضافة مورد جديد" :
-                                "تعديل بيانات مورد";
-                            break;
-                        case enPartyType.ContactPerson:
-                            ctrAddEditPerson.PersonType = enPartyType.ContactPerson;
-                            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                                "إضافة جهة تواصل جديدة" :
-                                "تعديل بيانات جهة التواصل";
-                            break;
-                        default:
-                            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                                "إضافة شخص جديد" :
-                                "تعديل بيانات شخص";
-                            break;
-                    }
+                    case enPartyType.Employee:
+                        ctrAddEditPerson.PersonType = enPartyType.Employee;
+                        this.Text = FormMode is enMode.Add ?
+                            "إضافة موظف جديد" :
+                            "تعديل بيانات موظف";
+                        break;
+                    case enPartyType.Customer:
+                        ctrAddEditPerson.PersonType = enPartyType.Customer;
+                        this.Text = FormMode is enMode.Add ?
+                            "إضافة عميل جديد" :
+                            "تعديل بيانات عميل";
+                        break;
+                    case enPartyType.Supplier:
+                        ctrAddEditPerson.PersonType = enPartyType.Supplier;
+                        this.Text = FormMode is enMode.Add ?
+                            "إضافة مورد جديد" :
+                            "تعديل بيانات مورد";
+                        break;
+                    case enPartyType.ContactPerson:
+                        ctrAddEditPerson.PersonType = enPartyType.ContactPerson;
+                        this.Text = FormMode is enMode.Add ?
+                            "إضافة جهة تواصل جديدة" :
+                            "تعديل بيانات جهة التواصل";
+                        break;
+                    default:
+                        this.Text = FormMode is enMode.Add ?
+                            "إضافة شخص جديد" :
+                            "تعديل بيانات شخص";
+                        break;
                 }
             }
         }
@@ -87,10 +84,6 @@ namespace SIMS.WinForms.Parties.Person
 
         private void frmAddEditPerson_Load(object sender, EventArgs e)
         {
-            this.Text = lblFormTitle.Text = FormMode is enMode.Add ?
-                "إضافة شخص" :
-                "تعديل شخص";
-
             if (FormMode is enMode.Edit)
             {
                 if (_Person is null)
