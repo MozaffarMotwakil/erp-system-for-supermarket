@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Suppliers;
 using BusinessLogic.Users;
@@ -32,6 +33,26 @@ namespace BusinessLogic.Products
         public clsUser UpdatedByUserInfo { get; }
         public DateTime? UpdatedAt { get; }
         public enMode Mode { get; private set; }
+
+        public List<clsUnit> AllUnits 
+        {
+            get
+            {
+                int[] productUnitIDs = clsProductService.GetAllProductUnits(ProductID.GetValueOrDefault())
+                    .AsEnumerable()
+                    .Select(unit => unit.Field<int>("UnitID"))
+                    .ToArray();
+
+                List<clsUnit> units = new List<clsUnit>();
+
+                foreach (int unitID in productUnitIDs)
+                {
+                    units.Add(clsUnit.Find(unitID));
+                }
+
+                return units;
+            }
+        }
 
         public clsProduct(string productName, string barcode, int categoryID, int mainUnitID, List<clsProductUnitConversion> unitConversions,
             int? mainSupplierID, decimal sellingPrice, string description, string imagePath)

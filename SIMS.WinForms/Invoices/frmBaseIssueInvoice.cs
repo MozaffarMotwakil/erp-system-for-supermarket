@@ -18,6 +18,23 @@ namespace SIMS.WinForms.Invoices
         protected int ErrorColumnIndex;
         protected BindingList<clsInvoiceLine> InvoiceLinesDataSource;
         protected clsInvoiceLine CurrentLine => dgvInvoiceLines.CurrentRow.DataBoundItem as clsInvoiceLine;
+        protected List<int> SelectedProductIDs => InvoiceLinesDataSource
+            .Where(
+                invoiceLine =>
+                invoiceLine != CurrentLine && invoiceLine.ProductID != null
+            )
+            .Select(invoiceLine => invoiceLine.ProductID.GetValueOrDefault())
+            .ToList();
+        protected List<int> SelectedProductIDsWithoutUnit => InvoiceLinesDataSource
+            .Where(
+                invoiceLine =>
+                invoiceLine.ProductID != CurrentLine?.ProductID && invoiceLine.ProductID != null && invoiceLine.UnitID == null
+            )
+            .Select(invoiceLine => invoiceLine.ProductID.GetValueOrDefault())
+            .Distinct()
+            .ToList();
+
+
 
         private frmBaseIssueInvoice()
         {

@@ -41,7 +41,6 @@ namespace SIMS.WinForms.Sales
                 .GetAvailableInventories();
         }
 
-
         protected override void dgvInvoiceLines_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             base.dgvInvoiceLines_RowsAdded(sender, e);
@@ -64,13 +63,18 @@ namespace SIMS.WinForms.Sales
 
         private void dgvInvoiceLines_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            // التأكد أننا فوق سطر بيانات وليس فوق الرأس (Header)
-            if (e.RowIndex < 0 || e.RowIndex >= InvoiceLinesDataSource.Count) return;
+            if (e.RowIndex < 0 || e.RowIndex >= InvoiceLinesDataSource.Count)
+            {
+                return;
+            }
 
             var line = InvoiceLinesDataSource[e.RowIndex];
-            if (line == null) return;
 
-            // تلميح عميد مبلغ الخصم (Amount Discounts)
+            if (line == null)
+            {
+                return;
+            }
+
             if (e.ColumnIndex == colDiscountAmount.Index && line.SaleDiscounts.Any())
             {
                 var amountDiscounts = line.SaleDiscounts
@@ -81,7 +85,6 @@ namespace SIMS.WinForms.Sales
                     e.ToolTipText = "تفاصيل الخصومات المقطوعة:" + Environment.NewLine + string.Join(Environment.NewLine, amountDiscounts);
             }
 
-            // تلميح عمود نسبة الخصم (Percentage Discounts)
             else if (e.ColumnIndex == colDiscountRate.Index && line.SaleDiscounts.Any())
             {
                 var percentDiscounts = line.SaleDiscounts
@@ -92,7 +95,6 @@ namespace SIMS.WinForms.Sales
                     e.ToolTipText = "تفاصيل نسب الخصم:" + Environment.NewLine + string.Join(Environment.NewLine, percentDiscounts);
             }
 
-            // تلميح عمود الضرائب
             else if ((e.ColumnIndex == colTaxAmount.Index || e.ColumnIndex == colTaxRate.Index) && line.SaleTaxes.Any())
             {
                 var taxes = line.SaleTaxes
@@ -121,24 +123,6 @@ namespace SIMS.WinForms.Sales
 
             if (e.ColumnIndex == colProduct.Index)
             {
-                List<int> selectedProductIDs = InvoiceLinesDataSource
-                    .Where(line => line != CurrentLine && line.ProductID != null)
-                    .Select(line => line.ProductID.Value)
-                    .ToList();
-
-                List<int> selectedProductIDsWithoutUnit = dgvInvoiceLines
-                            .Rows
-                            .Cast<DataGridViewRow>()
-                            .Where(
-                                invoiceLine =>
-                                !invoiceLine.IsNewRow &&
-                                (invoiceLine.Cells[colProduct.Index] as DataGridViewComboBoxCell).Value != null &&
-                                (invoiceLine.Cells[colUnit.Index] as DataGridViewComboBoxCell).Value == null
-                            )
-                            .Select(invoiceLine => Convert.ToInt32(invoiceLine.Cells[colProduct.Index].Value))
-                            .Distinct()
-                            .ToList();
-
                 DataGridViewComboBoxCell boxCell = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
 
                 boxCell.DataSource = _WarehouseAvailableInventories
@@ -146,8 +130,8 @@ namespace SIMS.WinForms.Sales
                     .Select(group => group.First().ProductInfo)
                     .Where(
                         product =>
-                        !selectedProductIDsWithoutUnit.Contains(product.ProductID.Value) &&
-                        (!selectedProductIDs.Contains(product.ProductID.Value) ||
+                        !SelectedProductIDsWithoutUnit.Contains(product.ProductID.Value) &&
+                        (!SelectedProductIDs.Contains(product.ProductID.Value) ||
                         GetSelectedProductUnitIDs(product.ProductID.Value).Count !=_WarehouseAvailableInventories
                             .Where(inventory => inventory.ProductInfo.ProductID == product.ProductID)
                             .Count())

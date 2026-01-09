@@ -29,7 +29,6 @@ namespace SIMS.WinForms.Sales
                 return;
             }
 
-            // تعيين معلومات الفاتورة الأصلية
             txtInvoiceNo.Text = _OrginalInvoice.InvoiceNo;
             cbWarehouse.SelectedValue = _OrginalInvoice.WarehouseInfo.WarehouseID;
         }
@@ -60,17 +59,16 @@ namespace SIMS.WinForms.Sales
                     .Select(line => line.ProductID.GetValueOrDefault())
                     .ToList();
 
-                // تصفية المنتجات:
-                // 1. يجب أن تكون الكمية المتبقية من المنتج لا تساوي صفر
-                // 2. يجب ألا يكون المنتج قد تم اختياره مسبقاً في سطر آخر، إلا إذا كان المنتج يحتوي على وحدات متعددة لم يتم استخدامها جميعاً
                 boxCell.DataSource = _OrginalInvoice.Lines
                     .Where(line => line.GetRemainingQuantity() > 0)
                     .GroupBy(line => line.ProductInfo.ProductID)
                     .Select(group => group.First().ProductInfo)
-                    .Where(product => product.ProductID != null &&
-                        !selectedProductIDs.Contains(product.ProductID.Value) ||
+                    .Where(
+                        product => product.ProductID != null &&
+                        !SelectedProductIDsWithoutUnit.Contains(product.ProductID.Value) &&
+                        (!selectedProductIDs.Contains(product.ProductID.Value) ||
                         GetSelectedProductUnitIDs(product.ProductID.Value).Count <
-                        _OrginalInvoice.Lines.Count(line => line.ProductID == product.ProductID))
+                        _OrginalInvoice.Lines.Count(line => line.ProductID == product.ProductID)))
                     .OrderBy(product => product.ProductName)
                     .ToList();
 
@@ -82,9 +80,6 @@ namespace SIMS.WinForms.Sales
             {
                 DataGridViewComboBoxCell boxCell = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
 
-                // تصفية الوحدات: 
-                // 1. الوحدة يجب أن تكون جزءاً من فاتورة الشراء الأصلية
-                // 2. يجب ألا تكون الوحدة قد تم اختيارها مسبقاً في سطر إرجاع آخر لهذا المنتج
                 boxCell.DataSource = _OrginalInvoice.Lines
                     .Where(line => line.ProductID == CurrentLine.ProductID && line.GetRemainingQuantity() > 0)
                     .Select(line => line.UnitInfo)
@@ -110,15 +105,12 @@ namespace SIMS.WinForms.Sales
 
                 if (originalLine == null) return;
 
-                // جلب البيانات الثابتة من السطر الأصلي
                 CurrentLine.UnitPrice = originalLine.FinalUnitPrice;
 
-                // التحقق من الكمية المدخلة
                 if (CurrentLine.Quantity != null)
                 {
                     int remainingQuantity = originalLine.GetRemainingQuantity();
 
-                    // التحقق من الكمية المتبقية
                     if (CurrentLine.Quantity > remainingQuantity)
                     {
                         CurrentLine.Quantity = remainingQuantity;

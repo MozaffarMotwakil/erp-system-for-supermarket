@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Media;
 using System.Windows.Forms;
 using BusinessLogic.Interfaces;
@@ -23,17 +25,12 @@ namespace SIMS.WinForms.Inventory
         {
             clsSupplierService.CreateInstance().EntitySaved += clsSupplier_SupplierSaved;
 
-            colProduct.DataSource = clsProductService.GetActiveProductsList();
-            colProduct.DisplayMember = "ProductName";
-            colProduct.ValueMember = "ProductID";
-
             cbParty.DataSource = clsSupplierService.GetActiveSuppliersList();
             cbParty.DisplayMember = "SupplierName";
             cbParty.ValueMember = "SupplierID";
             cbParty.SelectedItem = null;
             cbParty.Text = "إختار المورد";
 
-            dgvInvoiceLines.EditingControlShowing += dgvInvoiceLines_EditingControlShowing;
             txtInvoiceNo.Validating += txtInvoiceNo_Validating;
             cbParty.Validating += cbSupplier_Validating;
             cbParty.Enter += cbSupplier_Enter;
@@ -104,29 +101,47 @@ namespace SIMS.WinForms.Inventory
             cbParty.SelectedItem = e.EntityName;
         }
 
-        private void dgvInvoiceLines_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        protected override void dgvInvoiceLines_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (dgvInvoiceLines.CurrentCell.ColumnIndex == colUnit.Index)
+            base.dgvInvoiceLines_CellBeginEdit(sender, e);
+            DataTable activeProducts = clsProductService.GetActiveProductsList();
+
+            if (e.ColumnIndex == colProduct.Index)
             {
-                if (CurrentLine == null || CurrentLine.ProductID == null)
-                {
-                    return;
-                }
+                DataGridViewComboBoxCell boxCell = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
 
-                ComboBox currentCellComboBox = e.Control as ComboBox;
-                DataTable unitsData = clsProductService.GetAllProductUnits(CurrentLine.ProductID.GetValueOrDefault());
+                boxCell.DataSource = activeProducts
+                    .AsEnumerable()
+                    .Where(
+                        product =>
+                        !SelectedProductIDsWithoutUnit.Contains(product.Field<int>("ProductID")) &&
+                        (!SelectedProductIDs.Contains(product.Field<int>("ProductID")) ||
+                        GetSelectedProductUnitIDs(product.Field<int>("ProductID")).Count !=
+                        clsProductService.CreateInstance().Find(product.Field<int>("ProductID")).AllUnits.Count)
+                    )
+                    .OrderBy(product => product.Field<string>("ProductName"))
+                    .CopyToDataTable();
 
-                currentCellComboBox.DataSource = unitsData;
-                currentCellComboBox.DisplayMember = "UnitName";
-                currentCellComboBox.ValueMember = "UnitID";
+                colProduct.DisplayMember = "ProductName";
+                colProduct.ValueMember = "ProductID";
+            }
 
-                DataGridViewComboBoxCell cellComboBox = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
-                cellComboBox.DataSource = unitsData;
-                cellComboBox.DisplayMember = "UnitName";
-                cellComboBox.ValueMember = "UnitID";
+            if (e.ColumnIndex == colUnit.Index && CurrentLine != null && CurrentLine.ProductID.HasValue)
+            {
+                DataGridViewComboBoxCell boxCell = dgvInvoiceLines.CurrentCell as DataGridViewComboBoxCell;
 
-                clsFormHelper.PreventComboBoxAutoSelection(dgvInvoiceLines, currentCellComboBox);
-                clsFormHelper.ResetCellBackColor(dgvInvoiceLines, e);
+                List<clsUnit> productUnits = new List<clsUnit>();
+
+                boxCell.DataSource = CurrentLine.ProductInfo.AllUnits
+                    .Where(
+                        unit =>
+                        !GetSelectedProductUnitIDs(CurrentLine.ProductID.GetValueOrDefault())
+                            .Contains(unit.UnitID)
+                    )
+                    .ToList();
+
+                colUnit.DisplayMember = "UnitName";
+                colUnit.ValueMember = "UnitID";
             }
         }
 
