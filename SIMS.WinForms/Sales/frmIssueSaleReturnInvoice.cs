@@ -131,7 +131,6 @@ namespace SIMS.WinForms.Sales
             {
                 if (IsCurrentCellEmpty() && IsCurrentRowHasData())
                 {
-                    e.Cancel = true;
                     dgvInvoiceLines.CurrentRow.ErrorText = "يجب إختيار منتج";
                     SystemSounds.Asterisk.Play();
                 }
@@ -145,7 +144,6 @@ namespace SIMS.WinForms.Sales
             {
                 if (IsCurrentCellEmpty() && IsCurrentRowHasData())
                 {
-                    e.Cancel = true;
                     dgvInvoiceLines.CurrentRow.ErrorText = "يجب إختيار وحدة";
                     SystemSounds.Asterisk.Play();
                 }

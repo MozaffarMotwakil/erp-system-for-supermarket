@@ -11,29 +11,40 @@ namespace DVLD.WinForms.Utils
 
         public static bool IsDataGridViewCellsHasError(DataGridView dataGridView, int errorColumnIndex)
         {
-            for (int rowIndex = 0; rowIndex < dataGridView.Rows.Count - 1; rowIndex++)
+            int rowIndex = 0;
+            int columnIndex = 0;
+
+            try
             {
-                dataGridView.Rows[rowIndex].ErrorText = string.Empty;
-
-                for (int columnIndex = 0; columnIndex < dataGridView.Rows[rowIndex].Cells.Count; columnIndex++)
+                for (rowIndex = 0; rowIndex < dataGridView.Rows.Count - 1; rowIndex++)
                 {
-                    if (dataGridView.Columns[columnIndex].Visible)
+                    dataGridView.Rows[rowIndex].ErrorText = string.Empty;
+
+                    for (columnIndex = 0; columnIndex < dataGridView.Rows[rowIndex].Cells.Count; columnIndex++)
                     {
-                        dataGridView.CurrentCell = dataGridView.Rows[rowIndex].Cells[columnIndex];
-                        dataGridView.BeginEdit(true);
-                        dataGridView.CancelEdit();
-
-                        if (!string.IsNullOrEmpty(dataGridView.Rows[rowIndex].ErrorText))
+                        if (dataGridView.Columns[columnIndex].Visible)
                         {
-                            string oldError = dataGridView.Rows[rowIndex].ErrorText;
-                            dataGridView.CurrentCell = dataGridView.Rows[rowIndex].Cells[errorColumnIndex];
+                            dataGridView.CurrentCell = dataGridView.Rows[rowIndex].Cells[columnIndex];
                             dataGridView.BeginEdit(true);
-                            dataGridView.Rows[rowIndex].ErrorText = oldError;
+                            dataGridView.CancelEdit();
 
-                            return true;
+                            if (!string.IsNullOrEmpty(dataGridView.Rows[rowIndex].ErrorText))
+                            {
+                                string oldError = dataGridView.Rows[rowIndex].ErrorText;
+                                dataGridView.CurrentCell = dataGridView.Rows[rowIndex].Cells[errorColumnIndex];
+                                dataGridView.BeginEdit(true);
+                                dataGridView.Rows[rowIndex].ErrorText = oldError;
+
+                                return true;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                dataGridView.Rows[rowIndex].ErrorText = ex.Message;
+                return true;
             }
 
             return false;
