@@ -50,11 +50,12 @@
             // 
             // ctrSupplierInfo
             // 
+            this.ctrSupplierInfo.BackColor = System.Drawing.Color.White;
+            this.ctrSupplierInfo.Entity = null;
             this.ctrSupplierInfo.Location = new System.Drawing.Point(2, 1);
             this.ctrSupplierInfo.Name = "ctrSupplierInfo";
             this.ctrSupplierInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ctrSupplierInfo.Size = new System.Drawing.Size(800, 270);
-            this.ctrSupplierInfo.Entity = null;
             this.ctrSupplierInfo.TabIndex = 151;
             // 
             // frmShowSupplierInfo
@@ -65,6 +66,7 @@
             this.ClientSize = new System.Drawing.Size(805, 274);
             this.Controls.Add(this.ctrSupplierInfo);
             this.Controls.Add(this.btnCancle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmShowSupplierInfo";
