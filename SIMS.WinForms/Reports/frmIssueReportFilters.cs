@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using BusinessLogic.Invoices;
 using BusinessLogic.Reports;
@@ -64,8 +65,7 @@ namespace SIMS.WinForms.Reports
 
             if (_ReportName.Contains("مبيعات"))
             {
-                reportViewer.LocalReport.ReportPath =
-                    "C:\\Users\\mozaf\\GitHub\\erp-system-for-supermarket\\SIMS.WinForms\\Reports\\repSales.rdlc";
+                reportViewer.LocalReport.ReportEmbeddedResource = "SIMS.WinForms.Reports.repSales.rdlc";
 
                 List<clsBasicSalesReport> basicSalesReport = new List<clsBasicSalesReport>
                 {
@@ -78,8 +78,7 @@ namespace SIMS.WinForms.Reports
             }
             else
             {
-                reportViewer.LocalReport.ReportPath =
-                    "C:\\Users\\mozaf\\GitHub\\erp-system-for-supermarket\\SIMS.WinForms\\Reports\\repPurchases.rdlc";
+                reportViewer.LocalReport.ReportEmbeddedResource = "SIMS.WinForms.Reports.repPurchases.rdlc";
 
                 List<clsBasicPurchasesReport> basicPurchasesReport = new List<clsBasicPurchasesReport>
                 {
