@@ -64,6 +64,11 @@ namespace DVLD.WinForms.MainForms
         private void pcShowPassword_MouseUp(object sender, MouseEventArgs e)
         {
             clsFormHelper.HidePassword(sender, e);
+
+            if (cbShowPasswords.Checked)
+            {
+                cbShowPasswords.Checked = false;
+            }
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
