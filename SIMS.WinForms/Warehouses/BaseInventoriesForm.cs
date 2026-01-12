@@ -47,23 +47,23 @@ namespace SIMS.WinForms.Warehouses
                 base.dgvEntitiesList.Columns[9].HeaderText = "الكمية الحالية";
                 base.dgvEntitiesList.Columns[9].Width = 75;
 
-                base.dgvEntitiesList.Columns[10].HeaderText = "متوسط سعر الشراء (جنيه)";
+                base.dgvEntitiesList.Columns[10].HeaderText = "متوسط سعر شراء الوحدة (ج.س)";
                 base.dgvEntitiesList.Columns[10].Width = 85;
                 base.dgvEntitiesList.Columns[10].DefaultCellStyle.Format = "0.##";
 
-                base.dgvEntitiesList.Columns[11].HeaderText = "سعر البيع (جنيه)";
+                base.dgvEntitiesList.Columns[11].HeaderText = "سعر بيع الوحدة (ج.س)";
                 base.dgvEntitiesList.Columns[11].Width = 85;
                 base.dgvEntitiesList.Columns[11].DefaultCellStyle.Format = "0.##";
 
-                base.dgvEntitiesList.Columns[12].HeaderText = "تكلفة شراء المخزون (جنيه)";
+                base.dgvEntitiesList.Columns[12].HeaderText = "تكلفة شراء المخزون (ج.س)";
                 base.dgvEntitiesList.Columns[12].Width = 85;
                 base.dgvEntitiesList.Columns[12].DefaultCellStyle.Format = "0.##";
 
-                base.dgvEntitiesList.Columns[13].HeaderText = "قيمة بيع المخزون (جنيه)";
+                base.dgvEntitiesList.Columns[13].HeaderText = "قيمة بيع المخزون (ج.س)";
                 base.dgvEntitiesList.Columns[13].Width = 85;
                 base.dgvEntitiesList.Columns[13].DefaultCellStyle.Format = "0.##";
 
-                base.dgvEntitiesList.Columns[14].HeaderText = "الربح المتوقع (جنيه)";
+                base.dgvEntitiesList.Columns[14].HeaderText = "الربح المتوقع (ج.س)";
                 base.dgvEntitiesList.Columns[14].Width = 85;
                 base.dgvEntitiesList.Columns[14].DefaultCellStyle.Format = "0.##";
 
