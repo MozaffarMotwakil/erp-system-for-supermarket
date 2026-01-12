@@ -34,8 +34,6 @@ namespace SIMS.WinForms.Invoices
             .Distinct()
             .ToList();
 
-
-
         private frmBaseIssueInvoice()
         {
             InitializeComponent();
@@ -80,6 +78,8 @@ namespace SIMS.WinForms.Invoices
 
                 colDiscountAmount.Visible = colDiscountRate.Visible = colTaxAmount.Visible =
                     colTaxRate.Visible = colFinalUnitPrice.Visible = false;
+
+                colUnitPrice.ReadOnly = true;
             }
         }
 
@@ -102,7 +102,6 @@ namespace SIMS.WinForms.Invoices
             dgvInvoiceLines.Columns[colGrandTotal.Name].DataPropertyName = "LineGrandTotal";
         }
 
-
         private void _InvoiceLinesDataSource_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded ||
@@ -116,7 +115,6 @@ namespace SIMS.WinForms.Invoices
                 UpdateInvoiceSummary();
             }
         }
-
 
         protected virtual void dgvInvoiceLines_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
@@ -142,21 +140,37 @@ namespace SIMS.WinForms.Invoices
             if (e.RowIndex != -1 && e.ColumnIndex != -1 && e.RowIndex != dgvInvoiceLines.NewRowIndex &&
                 e.ColumnIndex == dgvInvoiceLines.Columns[colDelete.Index].Index)
             {
-                DialogResult result = MessageBox.Show("هل أنت متأكد من أنك تريد حذف هذا السطر ؟", "تأكيد",
+                _DeleteRow(e.RowIndex);
+            }
+        }
+
+        private void dgvInvoiceLines_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvInvoiceLines.CurrentCell.ColumnIndex == colDelete.Index && (dgvInvoiceLines.CurrentRow.Index != -1 || dgvInvoiceLines.CurrentCell.ColumnIndex != -1) && !dgvInvoiceLines.Rows[dgvInvoiceLines.CurrentRow.Index].IsNewRow)
+                {
+                    _DeleteRow(dgvInvoiceLines.CurrentRow.Index);
+                }
+            }
+        }
+
+        private void _DeleteRow(int rowIndex)
+        {
+            DialogResult result = MessageBox.Show("هل أنت متأكد من أنك تريد حذف هذا السطر ؟", "تأكيد",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
-                if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
+            {
+                if (dgvInvoiceLines.Rows[rowIndex].DataBoundItem is clsInvoiceLine lineToDelete)
                 {
-                    if (dgvInvoiceLines.Rows[e.RowIndex].DataBoundItem is clsInvoiceLine lineToDelete)
-                    {
-                        dgvInvoiceLines.CellValidating -= dgvInvoiceLines_CellValidating;
-                        InvoiceLinesDataSource.RemoveAt(e.RowIndex);
-                        dgvInvoiceLines.CellValidating += dgvInvoiceLines_CellValidating;
-                    }
+                    dgvInvoiceLines.CellValidating -= dgvInvoiceLines_CellValidating;
+                    InvoiceLinesDataSource.RemoveAt(rowIndex);
+                    dgvInvoiceLines.CellValidating += dgvInvoiceLines_CellValidating;
                 }
-
-                dgvInvoiceLines.ClearSelection();
             }
+
+            dgvInvoiceLines.ClearSelection();
         }
 
         protected virtual void dgvInvoiceLines_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
