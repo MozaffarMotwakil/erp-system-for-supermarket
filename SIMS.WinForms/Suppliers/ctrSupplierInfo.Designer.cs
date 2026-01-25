@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pageBasicInfo = new System.Windows.Forms.TabPage();
+            this.ctrPersonInfo = new SIMS.WinForms.Parties.Person.ctrPersonInfo();
+            this.lblActivityTitle = new System.Windows.Forms.Label();
+            this.lblActivityStatus = new System.Windows.Forms.Label();
             this.lblNotesTitle = new System.Windows.Forms.Label();
             this.lblNotes = new System.Windows.Forms.Label();
+            this.ctrOrganizationInfo = new SIMS.WinForms.Parties.Organization.ctrOrganizationInfo();
             this.pageSuppliedProducts = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.dgvSuppliedProducts = new System.Windows.Forms.DataGridView();
@@ -53,21 +57,26 @@
             this.SuppliesProductsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuppliedItemsLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageInvoices = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblInvoiceSearchHintText = new System.Windows.Forms.Label();
+            this.txtInvoiceSearch = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblDueAmount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblAmount = new System.Windows.Forms.Label();
+            this.lblRemainingAmount = new System.Windows.Forms.Label();
             this.cbInvoicesRange = new System.Windows.Forms.ComboBox();
             this.cbPaymentStatus = new System.Windows.Forms.ComboBox();
             this.cbInvoiceType = new System.Windows.Forms.ComboBox();
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.colPurchaseNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.InvoicesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pagePayments = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblTotalPayments = new System.Windows.Forms.Label();
             this.lavel13 = new System.Windows.Forms.Label();
             this.lblTotalReceipts = new System.Windows.Forms.Label();
@@ -75,22 +84,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.lblSearchHintText = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblPaymentSearchHintText = new System.Windows.Forms.Label();
+            this.txtPaymentSearch = new System.Windows.Forms.TextBox();
             this.cbPaymentsRange = new System.Windows.Forms.ComboBox();
             this.cbPaymentMethod = new System.Windows.Forms.ComboBox();
             this.cbPaymentType = new System.Windows.Forms.ComboBox();
             this.dgvPayments = new System.Windows.Forms.DataGridView();
+            this.PaymentsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.searchTimer = new System.Windows.Forms.Timer(this.components);
-            this.InvoicesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctrPersonInfo = new SIMS.WinForms.Parties.Person.ctrPersonInfo();
-            this.ctrOrganizationInfo = new SIMS.WinForms.Parties.Organization.ctrOrganizationInfo();
             this.tabControl.SuspendLayout();
             this.pageBasicInfo.SuspendLayout();
             this.pageSuppliedProducts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliedProducts)).BeginInit();
             this.SuppliesProductsContextMenuStrip.SuspendLayout();
             this.pageInvoices.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.pagePayments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -116,6 +124,8 @@
             // 
             this.pageBasicInfo.BackColor = System.Drawing.Color.White;
             this.pageBasicInfo.Controls.Add(this.ctrPersonInfo);
+            this.pageBasicInfo.Controls.Add(this.lblActivityTitle);
+            this.pageBasicInfo.Controls.Add(this.lblActivityStatus);
             this.pageBasicInfo.Controls.Add(this.lblNotesTitle);
             this.pageBasicInfo.Controls.Add(this.lblNotes);
             this.pageBasicInfo.Controls.Add(this.ctrOrganizationInfo);
@@ -126,6 +136,42 @@
             this.pageBasicInfo.Size = new System.Drawing.Size(786, 237);
             this.pageBasicInfo.TabIndex = 0;
             this.pageBasicInfo.Text = "المعلومات الأساسية";
+            // 
+            // ctrPersonInfo
+            // 
+            this.ctrPersonInfo.BackColor = System.Drawing.Color.White;
+            this.ctrPersonInfo.Location = new System.Drawing.Point(7, 7);
+            this.ctrPersonInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrPersonInfo.Name = "ctrPersonInfo";
+            this.ctrPersonInfo.Person = null;
+            this.ctrPersonInfo.PersonType = BusinessLogic.Parties.clsParty.enPartyType.Supplier;
+            this.ctrPersonInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ctrPersonInfo.Size = new System.Drawing.Size(775, 177);
+            this.ctrPersonInfo.TabIndex = 62;
+            // 
+            // lblActivityTitle
+            // 
+            this.lblActivityTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblActivityTitle.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActivityTitle.Location = new System.Drawing.Point(684, 208);
+            this.lblActivityTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblActivityTitle.Name = "lblActivityTitle";
+            this.lblActivityTitle.Size = new System.Drawing.Size(94, 16);
+            this.lblActivityTitle.TabIndex = 60;
+            this.lblActivityTitle.Text = "حالة النشاط:";
+            // 
+            // lblActivityStatus
+            // 
+            this.lblActivityStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblActivityStatus.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActivityStatus.ForeColor = System.Drawing.Color.Black;
+            this.lblActivityStatus.Location = new System.Drawing.Point(188, 208);
+            this.lblActivityStatus.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblActivityStatus.Name = "lblActivityStatus";
+            this.lblActivityStatus.Size = new System.Drawing.Size(458, 16);
+            this.lblActivityStatus.TabIndex = 59;
+            this.lblActivityStatus.Text = "N/A";
+            this.lblActivityStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblNotesTitle
             // 
@@ -150,6 +196,17 @@
             this.lblNotes.TabIndex = 59;
             this.lblNotes.Text = "N/A";
             this.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ctrOrganizationInfo
+            // 
+            this.ctrOrganizationInfo.Location = new System.Drawing.Point(188, 4);
+            this.ctrOrganizationInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrOrganizationInfo.Name = "ctrOrganizationInfo";
+            this.ctrOrganizationInfo.Organization = null;
+            this.ctrOrganizationInfo.OrganizationType = BusinessLogic.Parties.clsParty.enPartyType.Supplier;
+            this.ctrOrganizationInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ctrOrganizationInfo.Size = new System.Drawing.Size(594, 138);
+            this.ctrOrganizationInfo.TabIndex = 58;
             // 
             // pageSuppliedProducts
             // 
@@ -181,14 +238,14 @@
             this.dgvSuppliedProducts.AllowUserToResizeColumns = false;
             this.dgvSuppliedProducts.AllowUserToResizeRows = false;
             this.dgvSuppliedProducts.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSuppliedProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSuppliedProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSuppliedProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSuppliedProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNo,
@@ -200,14 +257,14 @@
             this.colTotalPurchases,
             this.colTotalReturnPurchases});
             this.dgvSuppliedProducts.ContextMenuStrip = this.SuppliesProductsContextMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSuppliedProducts.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSuppliedProducts.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSuppliedProducts.Location = new System.Drawing.Point(6, 6);
             this.dgvSuppliedProducts.MultiSelect = false;
             this.dgvSuppliedProducts.Name = "dgvSuppliedProducts";
@@ -256,7 +313,7 @@
             // 
             // colLastPurchasePrice
             // 
-            this.colLastPurchasePrice.HeaderText = "سعر آخر شراء (جنيه)";
+            this.colLastPurchasePrice.HeaderText = "سعر آخر شراء (ج.س)";
             this.colLastPurchasePrice.Name = "colLastPurchasePrice";
             this.colLastPurchasePrice.ReadOnly = true;
             this.colLastPurchasePrice.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -265,7 +322,7 @@
             // 
             // colAveragePurchasePrice
             // 
-            this.colAveragePurchasePrice.HeaderText = "متوسط سعر الشراء (جنيه)";
+            this.colAveragePurchasePrice.HeaderText = "متوسط سعر الشراء (ج.س)";
             this.colAveragePurchasePrice.Name = "colAveragePurchasePrice";
             this.colAveragePurchasePrice.ReadOnly = true;
             this.colAveragePurchasePrice.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -274,7 +331,7 @@
             // 
             // colTotalPurchases
             // 
-            this.colTotalPurchases.HeaderText = "مجموع المشتريات (جنيه)";
+            this.colTotalPurchases.HeaderText = "مجموع المشتريات (ج.س)";
             this.colTotalPurchases.Name = "colTotalPurchases";
             this.colTotalPurchases.ReadOnly = true;
             this.colTotalPurchases.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -283,7 +340,7 @@
             // 
             // colTotalReturnPurchases
             // 
-            this.colTotalReturnPurchases.HeaderText = "مجموع المرتجعات (جنيه)";
+            this.colTotalReturnPurchases.HeaderText = "مجموع المرتجعات (ج.س)";
             this.colTotalReturnPurchases.Name = "colTotalReturnPurchases";
             this.colTotalReturnPurchases.ReadOnly = true;
             this.colTotalReturnPurchases.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -311,14 +368,18 @@
             // pageInvoices
             // 
             this.pageInvoices.BackColor = System.Drawing.Color.White;
+            this.pageInvoices.Controls.Add(this.label12);
+            this.pageInvoices.Controls.Add(this.pictureBox1);
+            this.pageInvoices.Controls.Add(this.lblInvoiceSearchHintText);
+            this.pageInvoices.Controls.Add(this.txtInvoiceSearch);
             this.pageInvoices.Controls.Add(this.label8);
             this.pageInvoices.Controls.Add(this.label9);
             this.pageInvoices.Controls.Add(this.label6);
             this.pageInvoices.Controls.Add(this.label7);
             this.pageInvoices.Controls.Add(this.label4);
-            this.pageInvoices.Controls.Add(this.label3);
+            this.pageInvoices.Controls.Add(this.lblDueAmount);
             this.pageInvoices.Controls.Add(this.label2);
-            this.pageInvoices.Controls.Add(this.lblAmount);
+            this.pageInvoices.Controls.Add(this.lblRemainingAmount);
             this.pageInvoices.Controls.Add(this.cbInvoicesRange);
             this.pageInvoices.Controls.Add(this.cbPaymentStatus);
             this.pageInvoices.Controls.Add(this.cbInvoiceType);
@@ -331,35 +392,89 @@
             this.pageInvoices.TabIndex = 2;
             this.pageInvoices.Text = "المشتريات/المرتجعات";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(6, 223);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(333, 11);
+            this.label12.TabIndex = 54;
+            this.label12.Text = "- تنويه: يتم عرض آخر 100 فاتورة فقط، لرؤية جميع الفواتير الرجاء الذهاب لقسم الفوا" +
+    "تير.";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pictureBox1.Image = global::SIMS.WinForms.Properties.Resources.search_icon;
+            this.pictureBox1.Location = new System.Drawing.Point(369, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 49;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBoxAndSearchHintText_Click);
+            // 
+            // lblInvoiceSearchHintText
+            // 
+            this.lblInvoiceSearchHintText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInvoiceSearchHintText.BackColor = System.Drawing.Color.White;
+            this.lblInvoiceSearchHintText.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblInvoiceSearchHintText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvoiceSearchHintText.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblInvoiceSearchHintText.Location = new System.Drawing.Point(262, 9);
+            this.lblInvoiceSearchHintText.Name = "lblInvoiceSearchHintText";
+            this.lblInvoiceSearchHintText.Size = new System.Drawing.Size(101, 16);
+            this.lblInvoiceSearchHintText.TabIndex = 48;
+            this.lblInvoiceSearchHintText.Text = "أدخل رقم الفاتورة";
+            this.lblInvoiceSearchHintText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblInvoiceSearchHintText.Click += new System.EventHandler(this.pictureBoxAndSearchHintText_Click);
+            // 
+            // txtInvoiceSearch
+            // 
+            this.txtInvoiceSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInvoiceSearch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInvoiceSearch.Location = new System.Drawing.Point(221, 4);
+            this.txtInvoiceSearch.Name = "txtInvoiceSearch";
+            this.txtInvoiceSearch.Size = new System.Drawing.Size(148, 26);
+            this.txtInvoiceSearch.TabIndex = 47;
+            this.txtInvoiceSearch.TextChanged += new System.EventHandler(this.txtInvoiceSearch_TextChanged);
+            this.txtInvoiceSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gold;
-            this.label8.Location = new System.Drawing.Point(606, 221);
+            this.label8.Location = new System.Drawing.Point(600, 221);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.Size = new System.Drawing.Size(82, 13);
             this.label8.TabIndex = 45;
-            this.label8.Text = "🔴 مدفوع جزئيا";
+            this.label8.Text = "🔴 مدفوعة جزئيا";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(460, 221);
+            this.label9.Location = new System.Drawing.Point(370, 221);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.Size = new System.Drawing.Size(139, 13);
             this.label9.TabIndex = 45;
-            this.label9.Text = "🔴 مرتجعات";
+            this.label9.Text = "🔴 مرتجعات (بمختلف حالاتها)";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(527, 221);
+            this.label6.Location = new System.Drawing.Point(515, 221);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 13);
+            this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 45;
-            this.label6.Text = "🔴 غير مدفوع ";
+            this.label6.Text = "🔴 غير مدفوعة ";
             // 
             // label7
             // 
@@ -375,43 +490,43 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(203, 17);
+            this.label4.Location = new System.Drawing.Point(116, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(196, 13);
+            this.label4.Size = new System.Drawing.Size(99, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "إجمالي الرصيد المستحق من المورد:";
+            this.label4.Text = "الرصيد المستحق:";
             // 
-            // label3
+            // lblDueAmount
             // 
-            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Lime;
-            this.label3.Location = new System.Drawing.Point(6, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(191, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "0 جنيه";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDueAmount.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDueAmount.ForeColor = System.Drawing.Color.Lime;
+            this.lblDueAmount.Location = new System.Drawing.Point(6, 17);
+            this.lblDueAmount.Name = "lblDueAmount";
+            this.lblDueAmount.Size = new System.Drawing.Size(104, 13);
+            this.lblDueAmount.TabIndex = 7;
+            this.lblDueAmount.Text = "0 ج.س";
+            this.lblDueAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(232, 3);
+            this.label2.Location = new System.Drawing.Point(126, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 13);
+            this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "إجمالي الرصيد المتبقي للمورد:";
+            this.label2.Text = "الرصيد المتبقي:";
             // 
-            // lblAmount
+            // lblRemainingAmount
             // 
-            this.lblAmount.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmount.ForeColor = System.Drawing.Color.Red;
-            this.lblAmount.Location = new System.Drawing.Point(6, 3);
-            this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(191, 13);
-            this.lblAmount.TabIndex = 6;
-            this.lblAmount.Text = "0 جنيه";
-            this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblRemainingAmount.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRemainingAmount.ForeColor = System.Drawing.Color.Red;
+            this.lblRemainingAmount.Location = new System.Drawing.Point(6, 3);
+            this.lblRemainingAmount.Name = "lblRemainingAmount";
+            this.lblRemainingAmount.Size = new System.Drawing.Size(104, 13);
+            this.lblRemainingAmount.TabIndex = 6;
+            this.lblRemainingAmount.Text = "0 ج.س";
+            this.lblRemainingAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbInvoicesRange
             // 
@@ -468,26 +583,26 @@
             this.dgvInvoices.AllowUserToResizeColumns = false;
             this.dgvInvoices.AllowUserToResizeRows = false;
             this.dgvInvoices.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPurchaseNo});
             this.dgvInvoices.ContextMenuStrip = this.InvoicesContextMenuStrip;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvInvoices.Location = new System.Drawing.Point(6, 33);
             this.dgvInvoices.MultiSelect = false;
             this.dgvInvoices.Name = "dgvInvoices";
@@ -513,16 +628,17 @@
             this.colPurchaseNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colPurchaseNo.Width = 50;
             // 
-            // PaymentsContextMenuStrip
+            // InvoicesContextMenuStrip
             // 
-            this.PaymentsContextMenuStrip.Name = "contextMenuStrip";
-            this.PaymentsContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.PaymentsContextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            this.PaymentsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.InvoicesContextMenuStrip.Name = "contextMenuStrip";
+            this.InvoicesContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.InvoicesContextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.InvoicesContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.InvoicesContextMenuStrip_Opening);
             // 
             // pagePayments
             // 
             this.pagePayments.BackColor = System.Drawing.Color.White;
+            this.pagePayments.Controls.Add(this.label3);
             this.pagePayments.Controls.Add(this.lblTotalPayments);
             this.pagePayments.Controls.Add(this.lavel13);
             this.pagePayments.Controls.Add(this.lblTotalReceipts);
@@ -530,8 +646,8 @@
             this.pagePayments.Controls.Add(this.label1);
             this.pagePayments.Controls.Add(this.label5);
             this.pagePayments.Controls.Add(this.pictureBox);
-            this.pagePayments.Controls.Add(this.lblSearchHintText);
-            this.pagePayments.Controls.Add(this.txtSearch);
+            this.pagePayments.Controls.Add(this.lblPaymentSearchHintText);
+            this.pagePayments.Controls.Add(this.txtPaymentSearch);
             this.pagePayments.Controls.Add(this.cbPaymentsRange);
             this.pagePayments.Controls.Add(this.cbPaymentMethod);
             this.pagePayments.Controls.Add(this.cbPaymentType);
@@ -544,6 +660,18 @@
             this.pagePayments.TabIndex = 3;
             this.pagePayments.Text = "المدفوعات/المقبوضات";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(6, 223);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(397, 11);
+            this.label3.TabIndex = 53;
+            this.label3.Text = "- تنويه: يتم عرض آخر 100 سجل فقط، لرؤية جميع السجلات الرجاء الذهاب لقسم المدفوعات" +
+    "/المقبوضات.";
+            // 
             // lblTotalPayments
             // 
             this.lblTotalPayments.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -552,7 +680,7 @@
             this.lblTotalPayments.Name = "lblTotalPayments";
             this.lblTotalPayments.Size = new System.Drawing.Size(139, 13);
             this.lblTotalPayments.TabIndex = 51;
-            this.lblTotalPayments.Text = "0 جنيه";
+            this.lblTotalPayments.Text = "0 ج.س";
             this.lblTotalPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lavel13
@@ -573,7 +701,7 @@
             this.lblTotalReceipts.Name = "lblTotalReceipts";
             this.lblTotalReceipts.Size = new System.Drawing.Size(139, 13);
             this.lblTotalReceipts.TabIndex = 52;
-            this.lblTotalReceipts.Text = "0 جنيه";
+            this.lblTotalReceipts.Text = "0 ج.س";
             this.lblTotalReceipts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -612,7 +740,7 @@
             this.pictureBox.BackColor = System.Drawing.Color.White;
             this.pictureBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pictureBox.Image = global::SIMS.WinForms.Properties.Resources.search_icon;
-            this.pictureBox.Location = new System.Drawing.Point(369, 3);
+            this.pictureBox.Location = new System.Drawing.Point(369, 4);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(30, 26);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -620,33 +748,33 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBoxAndSearchHintText_Click);
             // 
-            // lblSearchHintText
+            // lblPaymentSearchHintText
             // 
-            this.lblSearchHintText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblPaymentSearchHintText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSearchHintText.BackColor = System.Drawing.Color.White;
-            this.lblSearchHintText.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblSearchHintText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchHintText.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblSearchHintText.Location = new System.Drawing.Point(262, 8);
-            this.lblSearchHintText.Name = "lblSearchHintText";
-            this.lblSearchHintText.Size = new System.Drawing.Size(101, 16);
-            this.lblSearchHintText.TabIndex = 5;
-            this.lblSearchHintText.Text = "أدخل رقم الفاتورة";
-            this.lblSearchHintText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSearchHintText.Click += new System.EventHandler(this.pictureBoxAndSearchHintText_Click);
+            this.lblPaymentSearchHintText.BackColor = System.Drawing.Color.White;
+            this.lblPaymentSearchHintText.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblPaymentSearchHintText.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaymentSearchHintText.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblPaymentSearchHintText.Location = new System.Drawing.Point(262, 9);
+            this.lblPaymentSearchHintText.Name = "lblPaymentSearchHintText";
+            this.lblPaymentSearchHintText.Size = new System.Drawing.Size(101, 16);
+            this.lblPaymentSearchHintText.TabIndex = 5;
+            this.lblPaymentSearchHintText.Text = "أدخل رقم الفاتورة";
+            this.lblPaymentSearchHintText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPaymentSearchHintText.Click += new System.EventHandler(this.pictureBoxAndSearchHintText_Click);
             // 
-            // txtSearch
+            // txtPaymentSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPaymentSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(221, 3);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(148, 26);
-            this.txtSearch.TabIndex = 3;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            this.txtPaymentSearch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaymentSearch.Location = new System.Drawing.Point(221, 4);
+            this.txtPaymentSearch.Name = "txtPaymentSearch";
+            this.txtPaymentSearch.Size = new System.Drawing.Size(148, 26);
+            this.txtPaymentSearch.TabIndex = 3;
+            this.txtPaymentSearch.TextChanged += new System.EventHandler(this.txtPaymentSearch_TextChanged);
+            this.txtPaymentSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // cbPaymentsRange
             // 
@@ -734,41 +862,18 @@
             this.dgvPayments.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPayments_RowPrePaint);
             this.dgvPayments.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ShowInvoiceInfo_KeyDown);
             // 
+            // PaymentsContextMenuStrip
+            // 
+            this.PaymentsContextMenuStrip.Name = "contextMenuStrip";
+            this.PaymentsContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.PaymentsContextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.PaymentsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
             // searchTimer
             // 
             this.searchTimer.Enabled = true;
             this.searchTimer.Interval = 300;
             this.searchTimer.Tick += new System.EventHandler(this.searchTimer_Tick);
-            // 
-            // InvoicesContextMenuStrip
-            // 
-            this.InvoicesContextMenuStrip.Name = "contextMenuStrip";
-            this.InvoicesContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.InvoicesContextMenuStrip.Size = new System.Drawing.Size(61, 4);
-            this.InvoicesContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.InvoicesContextMenuStrip_Opening);
-            // 
-            // ctrPersonInfo
-            // 
-            this.ctrPersonInfo.BackColor = System.Drawing.Color.White;
-            this.ctrPersonInfo.Location = new System.Drawing.Point(7, 7);
-            this.ctrPersonInfo.Margin = new System.Windows.Forms.Padding(4);
-            this.ctrPersonInfo.Name = "ctrPersonInfo";
-            this.ctrPersonInfo.Person = null;
-            this.ctrPersonInfo.PersonType = BusinessLogic.Parties.clsParty.enPartyType.Supplier;
-            this.ctrPersonInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ctrPersonInfo.Size = new System.Drawing.Size(775, 177);
-            this.ctrPersonInfo.TabIndex = 62;
-            // 
-            // ctrOrganizationInfo
-            // 
-            this.ctrOrganizationInfo.Location = new System.Drawing.Point(188, 4);
-            this.ctrOrganizationInfo.Margin = new System.Windows.Forms.Padding(4);
-            this.ctrOrganizationInfo.Name = "ctrOrganizationInfo";
-            this.ctrOrganizationInfo.Organization = null;
-            this.ctrOrganizationInfo.OrganizationType = BusinessLogic.Parties.clsParty.enPartyType.Supplier;
-            this.ctrOrganizationInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ctrOrganizationInfo.Size = new System.Drawing.Size(594, 138);
-            this.ctrOrganizationInfo.TabIndex = 58;
             // 
             // ctrSupplierInfo
             // 
@@ -787,6 +892,7 @@
             this.SuppliesProductsContextMenuStrip.ResumeLayout(false);
             this.pageInvoices.ResumeLayout(false);
             this.pageInvoices.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             this.pagePayments.ResumeLayout(false);
             this.pagePayments.PerformLayout();
@@ -801,8 +907,6 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage pageBasicInfo;
         private System.Windows.Forms.TabPage pageSuppliedProducts;
-        private System.Windows.Forms.Label lblNotesTitle;
-        private System.Windows.Forms.Label lblNotes;
         private Parties.Organization.ctrOrganizationInfo ctrOrganizationInfo;
         private System.Windows.Forms.TabPage pageInvoices;
         private System.Windows.Forms.TabPage pagePayments;
@@ -812,9 +916,9 @@
         private System.Windows.Forms.ComboBox cbInvoiceType;
         private System.Windows.Forms.ComboBox cbPaymentStatus;
         private System.Windows.Forms.ComboBox cbInvoicesRange;
-        private System.Windows.Forms.Label lblAmount;
+        private System.Windows.Forms.Label lblRemainingAmount;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblDueAmount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseNo;
         private System.Windows.Forms.ContextMenuStrip PaymentsContextMenuStrip;
@@ -822,8 +926,8 @@
         private System.Windows.Forms.ComboBox cbPaymentMethod;
         private System.Windows.Forms.ComboBox cbPaymentType;
         protected System.Windows.Forms.PictureBox pictureBox;
-        protected System.Windows.Forms.Label lblSearchHintText;
-        protected System.Windows.Forms.TextBox txtSearch;
+        protected System.Windows.Forms.Label lblPaymentSearchHintText;
+        protected System.Windows.Forms.TextBox txtPaymentSearch;
         protected System.Windows.Forms.Timer searchTimer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -848,5 +952,14 @@
         private System.Windows.Forms.ContextMenuStrip SuppliesProductsContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem SuppliedItemsLogToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip InvoicesContextMenuStrip;
+        protected System.Windows.Forms.PictureBox pictureBox1;
+        protected System.Windows.Forms.Label lblInvoiceSearchHintText;
+        protected System.Windows.Forms.TextBox txtInvoiceSearch;
+        private System.Windows.Forms.Label lblActivityTitle;
+        private System.Windows.Forms.Label lblActivityStatus;
+        private System.Windows.Forms.Label lblNotesTitle;
+        private System.Windows.Forms.Label lblNotes;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label12;
     }
 }

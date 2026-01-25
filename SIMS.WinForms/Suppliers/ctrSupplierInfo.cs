@@ -40,7 +40,11 @@ namespace SIMS.WinForms.Suppliers
                 }
 
                 _Supplier = value;
-                lblNotes.Text = string.IsNullOrEmpty(_Supplier.Notes) ? "N/A" : _Supplier.Notes;
+                lblNotes.Text = _Supplier.Notes.Length <= 60 ?
+                    string.IsNullOrEmpty(_Supplier.Notes) ? "N/A" : _Supplier.Notes :
+                    _Supplier.Notes.Substring(0, 55) + "... .";
+                lblActivityStatus.Text = _Supplier.IsActive ? "نشط" : "غير نشط";
+                lblActivityStatus.ForeColor = _Supplier.IsActive ? Color.Lime : Color.Red;
 
                 switch (_Supplier.PartyInfo.PartyCategory)
                 {
@@ -50,6 +54,8 @@ namespace SIMS.WinForms.Suppliers
                         ctrPersonInfo.Person = _Supplier.PartyInfo as clsPerson;
                         lblNotesTitle.Location = new Point(703, 188);
                         lblNotes.Location = new Point(188, 188);
+                        lblActivityTitle.Location = new Point(684,208);
+                        lblActivityStatus.Location = new Point(188,208);
                         break;
                     case clsParty.enPartyCategory.Organization:
                         ctrPersonInfo.Visible = false;
@@ -57,6 +63,8 @@ namespace SIMS.WinForms.Suppliers
                         ctrOrganizationInfo.Organization = _Supplier.PartyInfo as clsOrganization;
                         lblNotesTitle.Location = new Point(lblNotesTitle.Location.X, 142);
                         lblNotes.Location = new Point(lblNotes.Location.X, 142);
+                        lblActivityTitle.Location = new Point(lblActivityTitle.Location.X, 162);
+                        lblActivityStatus.Location = new Point(lblActivityStatus.Location.X, 162);
                         break;
                     default:
                         this.Visible = false;
@@ -91,7 +99,97 @@ namespace SIMS.WinForms.Suppliers
             }
         }
 
+        private void searchTimer_Tick(object sender, EventArgs e)
+        {
+            searchTimer.Stop();
+
+            if (tabControl.SelectedTab == pageInvoices)
+            {
+                _ApplyFilterForInvoicesPage();
+            }
+            else
+            {
+                _ApplyFilterForPaymentsPage();
+            }
+        }
+
+        private void pictureBoxAndSearchHintText_Click(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == pageInvoices)
+            {
+                txtInvoiceSearch.Focus();
+            }
+            else
+            {
+                txtPaymentSearch.Focus();
+            }
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataGridView currentDGV = _CurrentDGV;
+
+            if (currentDGV.Rows.Count == 0)
+            {
+                return;
+            }
+
+            int currentIndex = currentDGV.SelectedRows.Count > 0 ? currentDGV.SelectedRows[0].Index : -1;
+            int newIndex = currentIndex;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                ShowInvoiceDetails_Click(currentDGV, e);
+                e.Handled = true;
+                return;
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                if (currentIndex == currentDGV.Rows.Count - 1 || currentIndex == -1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = currentIndex + 1;
+                }
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                if (currentIndex == 0 || currentIndex == -1)
+                {
+                    newIndex = currentDGV.Rows.Count - 1;
+                }
+                else
+                {
+                    newIndex = currentIndex - 1;
+                }
+            }
+            else
+            {
+                return;
+            }
+
+            currentDGV.ClearSelection();
+            currentDGV.Rows[newIndex].Selected = true;
+
+            int firstVisibleRow = currentDGV.FirstDisplayedScrollingRowIndex;
+            int displayedCount = currentDGV.DisplayedRowCount(false);
+            int lastVisibleRow = firstVisibleRow + displayedCount - 1;
+
+            if (newIndex > lastVisibleRow)
+            {
+                currentDGV.FirstDisplayedScrollingRowIndex = newIndex - displayedCount + 1;
+            }
+            else if (newIndex < firstVisibleRow)
+            {
+                currentDGV.FirstDisplayedScrollingRowIndex = newIndex;
+            }
+
+            e.Handled = true;
+        }
         #region Control
+
         private void ShowInvoiceDetails_Click(object sender, EventArgs e)
         {
             clsInvoice invoice = _SelectedInvoice;
@@ -179,9 +277,9 @@ namespace SIMS.WinForms.Suppliers
                 clsFormHelper.DisableSortableDataGridViewColumns(dgvPayments);
 
                 cbPaymentsRange.Enabled = cbPaymentType.Enabled =
-                    cbPaymentMethod.Enabled = txtSearch.Enabled = true;
+                    cbPaymentMethod.Enabled = txtPaymentSearch.Enabled = true;
 
-                lblSearchHintText.BackColor = Color.White;
+                lblPaymentSearchHintText.BackColor = Color.White;
 
                 dgvPayments.ColumnHeadersDefaultCellStyle.Font =
                     new Font("Tahoma", 7, FontStyle.Bold);
@@ -201,19 +299,19 @@ namespace SIMS.WinForms.Suppliers
                 dgvPayments.Columns[3].HeaderText = "رقم الفاتورة";
                 dgvPayments.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                dgvPayments.Columns[4].HeaderText = "إجمالي الفاتورة (جنيه)";
+                dgvPayments.Columns[4].HeaderText = "إجمالي الفاتورة (ج.س)";
                 dgvPayments.Columns[4].Width = 100;
 
                 dgvPayments.Columns[5].HeaderText = "طريقة الدفع";
                 dgvPayments.Columns[5].Width = 80;
 
-                dgvPayments.Columns[6].HeaderText = "المبلغ المدفوع (جنيه)";
+                dgvPayments.Columns[6].HeaderText = "المبلغ المدفوع (ج.س)";
                 dgvPayments.Columns[6].Width = 100;
 
-                dgvPayments.Columns[7].HeaderText = "الرصيد التراكمي (جنيه)";
+                dgvPayments.Columns[7].HeaderText = "الرصيد التراكمي (ج.س)";
                 dgvPayments.Columns[7].Width = 100;
 
-                dgvPayments.Columns[8].HeaderText = "المبلغ المتبقي (جنيه)";
+                dgvPayments.Columns[8].HeaderText = "المبلغ المتبقي (ج.س)";
                 dgvPayments.Columns[8].Width = 100;
 
                 dgvPayments.Columns[9].HeaderText = "معرف نوع الفاتورة";
@@ -222,9 +320,9 @@ namespace SIMS.WinForms.Suppliers
             else
             {
                 cbPaymentsRange.Enabled = cbPaymentType.Enabled =
-                    cbPaymentMethod.Enabled = txtSearch.Enabled = false;
+                    cbPaymentMethod.Enabled = txtPaymentSearch.Enabled = false;
 
-                lblSearchHintText.BackColor = SystemColors.Control;
+                lblPaymentSearchHintText.BackColor = SystemColors.Control;
             }
         }
 
@@ -240,19 +338,14 @@ namespace SIMS.WinForms.Suppliers
                 .Cast<DataGridViewRow>()
                 .Where(row => (int)row.Cells["InvoiceTypeID"].Value == 1)
                 .Sum(row => Convert.ToSingle(row.Cells["PaymentAmount"].Value))
-                .ToString() + " جنيه";
+                .ToString() + " ج.س";
 
             lblTotalReceipts.Text = dgvPayments
                 .Rows
                 .Cast<DataGridViewRow>()
                 .Where(row => (int)row.Cells["InvoiceTypeID"].Value == 2)
                 .Sum(row => Convert.ToSingle(row.Cells["PaymentAmount"].Value))
-                .ToString() + " جنيه";
-        }
-
-        private void pictureBoxAndSearchHintText_Click(object sender, EventArgs e)
-        {
-            txtSearch.Focus();
+                .ToString() + " ج.س";
         }
 
         private void cbPaymentType_SelectedIndexChanged(object sender, EventArgs e)
@@ -270,78 +363,11 @@ namespace SIMS.WinForms.Suppliers
             _ApplyFilterForPaymentsPage();
         }
 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void txtPaymentSearch_TextChanged(object sender, EventArgs e)
         {
-            DataGridView currentDGV = _CurrentDGV;
-
-            if (currentDGV.Rows.Count == 0) return;
-
-            int currentIndex = currentDGV.SelectedRows.Count > 0 ? currentDGV.SelectedRows[0].Index : -1;
-            int newIndex = currentIndex;
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                ShowInvoiceDetails_Click(currentDGV, e);
-                e.Handled = true;
-                return;
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                if (currentIndex == currentDGV.Rows.Count - 1 || currentIndex == -1)
-                {
-                    newIndex = 0;
-                }
-                else
-                {
-                    newIndex = currentIndex + 1;
-                }
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                if (currentIndex == 0 || currentIndex == -1)
-                {
-                    newIndex = currentDGV.Rows.Count - 1;
-                }
-                else
-                {
-                    newIndex = currentIndex - 1;
-                }
-            }
-            else
-            {
-                return;
-            }
-
-            currentDGV.ClearSelection();
-            currentDGV.Rows[newIndex].Selected = true;
-
-            int firstVisibleRow = currentDGV.FirstDisplayedScrollingRowIndex;
-            int displayedCount = currentDGV.DisplayedRowCount(false);
-            int lastVisibleRow = firstVisibleRow + displayedCount - 1;
-
-            if (newIndex > lastVisibleRow)
-            {
-                currentDGV.FirstDisplayedScrollingRowIndex = newIndex - displayedCount + 1;
-            }
-            else if (newIndex < firstVisibleRow)
-            {
-                currentDGV.FirstDisplayedScrollingRowIndex = newIndex;
-            }
-
-            e.Handled = true;
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            lblSearchHintText.Visible = string.IsNullOrEmpty(txtSearch.Text);
+            lblPaymentSearchHintText.Visible = string.IsNullOrEmpty(txtPaymentSearch.Text);
             searchTimer.Stop();
             searchTimer.Start();
-        }
-
-        private void searchTimer_Tick(object sender, EventArgs e)
-        {
-            searchTimer.Stop();
-            _ApplyFilterForPaymentsPage();
         }
 
         private void _ApplyFilterForPaymentsPage()
@@ -387,9 +413,9 @@ namespace SIMS.WinForms.Suppliers
 
             filters.Add($"(PaymentDate >= #{range:yyyy-MM-dd}# AND PaymentDate <= #{DateTime.Now:yyyy-MM-dd}#)");
 
-            if (!string.IsNullOrEmpty(txtSearch.Text))
+            if (!string.IsNullOrEmpty(txtPaymentSearch.Text))
             {
-                filters.Add($"InvoiceNa LIKE '%{txtSearch.Text}%'");
+                filters.Add($"InvoiceNa LIKE '%{txtPaymentSearch.Text}%'");
             }
 
             try
@@ -525,13 +551,13 @@ namespace SIMS.WinForms.Suppliers
 
                 dgvInvoices.Columns[7].Visible = false;
 
-                dgvInvoices.Columns[8].HeaderText = "الإجمالي النهائي (جنيه)";
+                dgvInvoices.Columns[8].HeaderText = "الإجمالي النهائي (ج.س)";
                 dgvInvoices.Columns[8].Width = 110;
 
-                dgvInvoices.Columns[9].HeaderText = "المبلغ المدفوع (جنيه)";
+                dgvInvoices.Columns[9].HeaderText = "المبلغ المدفوع (ج.س)";
                 dgvInvoices.Columns[9].Width = 110;
 
-                dgvInvoices.Columns[10].HeaderText = "المبلغ المتبقي (جنيه)";
+                dgvInvoices.Columns[10].HeaderText = "المبلغ المتبقي (ج.س)";
                 dgvInvoices.Columns[10].Width = 110;
             }
             else
@@ -655,19 +681,19 @@ namespace SIMS.WinForms.Suppliers
         {
             dgvInvoices.ClearSelection();
 
-            lblAmount.Text = dgvInvoices
+            lblRemainingAmount.Text = dgvInvoices
                 .Rows
                 .Cast<DataGridViewRow>()
                 .Where(row => (int)row.Cells["InvoiceTypeID"].Value == 1)
                 .Sum(row => Convert.ToSingle(row.Cells["RemainingAmount"].Value))
-                .ToString() + " جنيه";
+                .ToString() + " ج.س";
 
-            label3.Text = dgvInvoices
+            lblDueAmount.Text = dgvInvoices
                 .Rows
                 .Cast<DataGridViewRow>()
                 .Where(row => (int)row.Cells["InvoiceTypeID"].Value == 2)
                 .Sum(row => Convert.ToSingle(row.Cells["RemainingAmount"].Value))
-                .ToString() + " جنيه";
+                .ToString() + " ج.س";
         }
 
         private void cbInvoiceType_SelectedIndexChanged(object sender, EventArgs e)
@@ -685,6 +711,13 @@ namespace SIMS.WinForms.Suppliers
             _ApplyFilterForInvoicesPage();
         }
 
+        private void txtInvoiceSearch_TextChanged(object sender, EventArgs e)
+        {
+            lblInvoiceSearchHintText.Visible = string.IsNullOrEmpty(txtInvoiceSearch.Text);
+            searchTimer.Stop();
+            searchTimer.Start();
+        }
+
         private void _ApplyFilterForInvoicesPage()
         {
             if (dgvInvoices.DataSource == null || (dgvInvoices.DataSource as DataTable).Rows.Count == 0)
@@ -693,7 +726,6 @@ namespace SIMS.WinForms.Suppliers
             }
 
             List<string> filters = new List<string>();
-            DataView invoices = (dgvInvoices.DataSource as DataTable).DefaultView;
             DateTime range;
 
             if (cbInvoiceType.SelectedIndex != 0)
@@ -728,7 +760,21 @@ namespace SIMS.WinForms.Suppliers
             }
 
             filters.Add($"(InvoiceDate >= #{range:yyyy-MM-dd}# AND InvoiceDate <= #{DateTime.Now:yyyy-MM-dd}#)");
-            invoices.RowFilter = string.Join(" AND ", filters);
+
+            if (!string.IsNullOrEmpty(txtInvoiceSearch.Text))
+            {
+                filters.Add($"InvoiceNa LIKE '%{txtInvoiceSearch.Text}%'");
+            }
+
+            try
+            {
+                DataView invoices = (dgvInvoices.DataSource as DataTable).DefaultView;
+                invoices.RowFilter = string.Join(" AND ", filters);
+            }
+            catch
+            {
+                // في حال رمي إستثناء بسبب إدخال رموز غير صالحة فلا حاجة لعرض رسالة خطأ أو إيقاف تجربة المستخدم
+            }
         }
         #endregion InvoicesPage
 
